@@ -1,5 +1,5 @@
 module.exports = class {
     constructor() {
-        this.token = "YOUR BEAUTIFUL TOKEN HERE";
+        this.token = "YOUR BOOTIFUL TOKEN HERE";
     }
 }
