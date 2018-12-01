@@ -157,21 +157,19 @@ module.exports = class extends Language {
 			COMMAND_DISABLE_DESCRIPTION: 'Re-disables or temporarily disables a command/inhibitor/monitor/finalizer/event. Default state restored on reboot.',
 			COMMAND_DISABLE_WARN: 'You probably don\'t want to disable that, since you wouldn\'t be able to run any command to enable it again',
 			COMMAND_STATS: (memUsage, uptime, users, guilds, channels, klasaVersion, discordVersion, processVersion, message) => [
-				'= STATISTICS =',
-				'',
-				`• Mem Usage  :: ${memUsage} MB`,
-				`• Uptime     :: ${uptime}`,
-				`• Users      :: ${users}`,
-				`• Guilds     :: ${guilds}`,
-				`• Channels   :: ${channels}`,
-				`• Klasa      :: v${klasaVersion}`,
-				`• Discord.js :: v${discordVersion}`,
-				`• Node.js    :: ${processVersion}`,
-				`• Shard      :: ${(message.guild ? message.guild.shardID : 0) + 1} / ${this.client.options.totalShardCount}`
-			],
+				`**__${this.client.user.tag}'s Statistics__**`,
+				``,
+				`• Mem Usage: \`${memUsage} MB\``,
+				`• Uptime: \`${uptime}\``,
+				`• Users: \`${users}\``,
+				`• Guilds: \`${guilds}\``,
+				`• Channels: \`${channels}\``,
+				`• Klasa: \`v${klasaVersion}\``,
+				`• Discord.js: \`v${discordVersion}\``,
+				`• Node.js: \`${processVersion}\``,
+				`• Shard: \`${(message.guild ? message.guild.shardID : 0) + 1} / ${this.client.options.totalShardCount}\``
+			].join('\n'),
 			COMMAND_STATS_DESCRIPTION: 'Provides some details about the bot and stats.',
-			COMMAND_ROLE_DESCRIPTION: 'Choose a role for someone *oof*',
-			COMMAND_ROLE_TEXT: (role) => `${ye} Bang! They got the **${role}** role! Congrats!`,
 			COMMAND_PREFIX_DESCRIPTION: 'Set, Reset or Get the bot\'s prefix(es) in this guild.',
 			COMMAND_LANGUAGE_DESCRIPTION: 'Set, Reset or Get the bot\'s language in this guild.',
 			CONFIG_NOVALUE: `${dataNo} You must provide a value.`,
@@ -181,7 +179,8 @@ module.exports = class extends Language {
 			CONFIG_REMOVE_SUCCESS: (key, value) => `${dataMinus} The value **${util.regExpEsc(value.join(' '))}** has been removed from **${key}**.`,
 			CONFIG_NOT_TYPE: (key) => `${dataNo} The key **${key}** must be a valid **${key} name**.`,
 			CONFIG_SHOW: (key, value) => `${dataGet} Value of the key **${key}** is \`${Array.isArray(value) ? value.join(', ').length > 0 ? value.join('\`, \`') : `@${this.client.user.tag}` : value}\`.`,
-			CONFIG_RESET_SUCCESS: (key) => `${dataYe} The key **${key}** has been reset to default.`
+			CONFIG_RESET_SUCCESS: (key) => `${dataYe} The key **${key}** has been reset to default.`,
+			REQUESTED: (tag) => `Requested by ${tag}`
 		};
 	}
 

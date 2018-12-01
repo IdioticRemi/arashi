@@ -31,7 +31,7 @@ module.exports = class extends Command {
 		}
 		const help = await this.buildHelp(message);
 		const categories = Object.keys(help);
-		const helpEmbed = new Discord.MessageEmbed().setColor('GREEN').setTimestamp().setFooter(`Requested by ${message.author.tag}`, message.author.avatarURL()).setThumbnail(this.client.user.avatarURL())
+		const helpEmbed = new Discord.MessageEmbed().setColor('GREEN').setTimestamp().setFooter(message.language.get('REQUESTED', [message.author.tag]), message.author.avatarURL()).setThumbnail(this.client.user.avatarURL())
 		for (let cat = 0; cat < categories.length; cat++) {
 			let temp = [];
 			const subCategories = Object.keys(help[categories[cat]]);
