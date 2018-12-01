@@ -4,6 +4,7 @@ module.exports = class extends Command {
 
 	constructor(...args) {
 		super(...args, {
+			aliases: ['restart'],
 			permissionLevel: 10,
 			guarded: true,
 			description: language => language.get('COMMAND_REBOOT_DESCRIPTION')
