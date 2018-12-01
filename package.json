@@ -1,0 +1,24 @@
+{
+  "name": "arashi",
+  "version": "0.0.1",
+  "description": "Arashi, a good public discord.js-made Discord bot.",
+  "main": "arashi.js",
+  "scripts": {
+    "test": "node arashi.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Kizuru/Arashi"
+  },
+  "keywords": [],
+  "author": "Kizuru",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Kizuru/Arashi/issues"
+  },
+  "homepage": "https://github.com/Kizuru/Arashi#readme",
+  "dependencies": {
+    "discord.js": "github:discordjs/discord.js",
+    "klasa": "github:dirigeants/klasa"
+  }
+}
