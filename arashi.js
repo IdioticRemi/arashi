@@ -11,4 +11,4 @@ new Klasa.Client({
     noPrefixDM: true,
     prefix: ['a!', 'a$'],
     readyMessage: (client) => `Successfully initialized. Ready to serve ${client.guilds.size} guilds.`
-}).login(cfg.token);
+}).login(cfg.token); 
