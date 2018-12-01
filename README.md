@@ -1,3 +1,5 @@
+<a href='https://nodejs.org/'><image src='https://img.shields.io/badge/node--js-v11.3.0-brightgreen.svg?logo=node.js&longCache=true&style=flat-square'></a> <a href='http://npmjs.com/'><image src='https://img.shields.io/badge/npm-6.2.0-orange.svg?logo=npm&longCache=true&style=flat-square'></a> <a href='https://www.npmjs.com/package/discord.js'><image src='https://img.shields.io/badge/discord.js-v12.0.0--dev-blue.svg?logo=npm&longCache=true&style=flat-square'></a> <a href='https://www.npmjs.com/package/klasa'><image src='https://img.shields.io/badge/klasa-v0.5.0--dev-blue.svg?logo=npm&longCache=true&style=flat-square'></a> <a href='https://discord.gg/kaZ2jf8'><image src='https://img.shields.io/discord/517738561420787722.svg?logo=discord&longCache=true&style=flat-square&colorB=7289DA'></a>
+
 # Arashi
 Arashi is a public Discord bot that uses Klasa framework to work around with discord.js to interact with the DiscordAPI.
 
