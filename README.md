@@ -17,4 +17,5 @@ npm install
 node arashi.js
 ```
 
-If you have any issues with the bot, post a new issue on this github page:
+If you encounter any issues with the bot, post a new issue here:
+https://github.com/Kizuru/Arashi/issues/new
