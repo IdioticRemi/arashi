@@ -26,13 +26,16 @@ module.exports = class extends Command {
     }
 
     async add(message, [...value]) {
+        const prefixes = await message.guild.settings.get('prefix');
+        if (prefixes.length == 5) return message.sendLocale('CONFIG_ADD_UNSUCCESS', ['prefix', value, 5]);
+        if (prefixes.includes(value.join(' '))) return message.sendLocale('CONFIG_ALREADY_EXISTS', ['prefix', value]);
         await message.guild.settings.update('prefix', value.join(' '), { action: 'add' });
         message.sendLocale('CONFIG_ADD_SUCCESS', ['prefix', value]);
     }
 
     async remove(message, [...value]) {
         const prefixes = await message.guild.settings.get('prefix');
-        if (prefixes.length == 1) return message.sendLocale('CONFIG_REMOVE_UNSUCCESS', ['prefix', value]);
+        if (prefixes.length == 1) return message.sendLocale('CONFIG_REMOVE_UNSUCCESS', ['prefix', value, 1]);
         await message.guild.settings.update('prefix', value.join(' '), { action: 'remove' });
         message.sendLocale('CONFIG_REMOVE_SUCCESS', ['prefix', value]);
     }

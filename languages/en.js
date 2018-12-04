@@ -5,6 +5,7 @@ const ye = `<:ye:518161458874286112>`,
 	star = `<:koolStar:518153001433825300>`,
 	minus = `<:minus:518160306036539407>`,
 	gears = `<:gears:517743812039409674>`,
+	yt = `<:youtube:518153001370910720>`,
 	inbox = `<:koolInbox:518153001265790986>`,
 	dataGet = `<:dataGet:518176907582505002>`,
 	dataYe = `<:dataYe:518149292049956891>`,
@@ -23,6 +24,7 @@ module.exports = class extends Language {
 				`es for this guild are: ${prefix.map(pre => `\`${pre}\``).join(`, `)}` :
 				` in this guild is set to: \`${prefix}\``
 			}`,
+			
 			SETTING_GATEWAY_EXPECTS_GUILD: `The parameter <Guild> expects either a Guild or a Guild Object.`,
 			SETTING_GATEWAY_VALUE_FOR_KEY_NOEXT: (data, key) => `The value ${data} for the key ${key} does not exist.`,
 			SETTING_GATEWAY_VALUE_FOR_KEY_ALREXT: (data, key) => `The value ${data} for the key ${key} already exists.`,
@@ -31,6 +33,7 @@ module.exports = class extends Language {
 			SETTING_GATEWAY_KEY_NOEXT: (key) => `The key ${key} does not exist in the current data schema.`,
 			SETTING_GATEWAY_INVALID_TYPE: `The type parameter must be either add or remove.`,
 			SETTING_GATEWAY_INVALID_FILTERED_VALUE: (piece, value) => `${piece.key} doesn't accept the value: ${value}`,
+			
 			RESOLVER_MULTI_TOO_FEW: (name, min = 1) => `Provided too few ${name}s. Atleast ${min} ${min === 1 ? `is` : `are`} required.`,
 			RESOLVER_INVALID_BOOL: (name) => `${name} must be true or false.`,
 			RESOLVER_INVALID_CHANNEL: (name) => `${name} must be a channel tag or valid channel id.`,
@@ -56,15 +59,19 @@ module.exports = class extends Language {
 			RESOLVER_MINMAX_BOTH: (name, min, max, suffix) => `${name} must be between ${min} and ${max}${suffix}.`,
 			RESOLVER_MINMAX_MIN: (name, min, suffix) => `${name} must be greater than ${min}${suffix}.`,
 			RESOLVER_MINMAX_MAX: (name, max, suffix) => `${name} must be less than ${max}${suffix}.`,
+			
 			REACTIONHANDLER_PROMPT: `Which page would you like to jump to?`,
+			
 			COMMANDMESSAGE_MISSING: `Missing one or more required arguments after end of input.`,
 			COMMANDMESSAGE_MISSING_REQUIRED: (name) => `**${name}** is a required argument.`,
 			COMMANDMESSAGE_MISSING_OPTIONALS: (possibles) => `Missing a required option: (${possibles})`,
 			COMMANDMESSAGE_NOMATCH: (possibles) => `Your option didn't match any of the possibilities: (${possibles})`,
+			
 			MONITOR_COMMAND_HANDLER_REPROMPT: (tag, error, time, abortOptions) => `${tag} | **${error}** | You have **${time}** seconds to respond to this prompt with a valid argument. Type **${abortOptions.join(`**, **`)}** to abort this prompt.`,
 			MONITOR_COMMAND_HANDLER_REPEATING_REPROMPT: (tag, name, time) => `${tag} | **${name}** is a repeating argument | You have **${time}** seconds to respond to this prompt with additional valid arguments. Type **"CANCEL"** to cancel this prompt.`,
 			MONITOR_COMMAND_HANDLER_ABORTED: `Aborted`,
 			MONITOR_COMMAND_HANDLER_POSSIBILITIES: [`abort`, `stop`],
+			
 			INHIBITOR_COOLDOWN: (remaining) => `${no} You have just used this command. You can use this command again in **${remaining} second${remaining === 1 ? `` : `s`}**.`,
 			INHIBITOR_DISABLED: `${no} This command is currently disabled.`,
 			INHIBITOR_MISSING_BOT_PERMS: (missing) => `${no} Insufficient permissions, missing: **${missing}**.`,
@@ -73,6 +80,7 @@ module.exports = class extends Language {
 			INHIBITOR_REQUIRED_SETTINGS: (settings) => `The guild is missing the **${settings.join(`, `)}** guild setting${settings.length !== 1 ? `s` : ``} and thus the command cannot run.`,
 			INHIBITOR_RUNIN: (types) => `${no} This command is only available in ${types} channels.`,
 			INHIBITOR_RUNIN_NONE: (name) => `${no} The ${name} command is not configured to run in any channel.`,
+			
 			COMMAND_BLACKLIST_DESCRIPTION: `Blacklists or un-blacklists users and guilds from the bot.`,
 			COMMAND_BLACKLIST_SUCCESS: (usersAdded, usersRemoved, guildsAdded, guildsRemoved) => [
 				usersAdded.length ? `**Users Added**\n${util.codeBlock(``, usersAdded.join(`, `))}` : ``,
@@ -80,41 +88,57 @@ module.exports = class extends Language {
 				guildsAdded.length ? `**Guilds Added**\n${util.codeBlock(``, guildsAdded.join(`, `))}` : ``,
 				guildsRemoved.length ? `**Guilds Removed**\n${util.codeBlock(``, guildsRemoved.join(`, `))}` : ``
 			].filter(val => val !== ``).join(`\n`),
+			
 			COMMAND_EVAL_DESCRIPTION: `Evaluates arbitrary Javascript. Reserved for bot owner.`,
 			COMMAND_EVAL_EXTENDEDHELP: [
 				`The eval command evaluates code as-in, any error thrown from it will be handled.`,
 				`It also uses the flags feature. Write --silent, --depth=number or --async to customize the output.`,
+				`The --wait flag changes the time the eval will run. Defaults to 10 seconds. Accepts time in milliseconds.`,
+				`The --output and --output-to flag accept either 'file', 'log', 'haste' or 'hastebin'.`,
+				`The --delete flag makes the command delete the message that executed the message after evaluation.`,
 				`The --silent flag will make it output nothing.`,
-				"The --depth flag accepts a number, for example, --depth=2, to customize util.inspect`s depth.",
+				`The --depth flag accepts a number, for example, --depth=2, to customize util.inspect's depth.`,
 				`The --async flag will wrap the code into an async function where you can enjoy the use of await, however, if you want to return something, you will need the return keyword.`,
 				`The --showHidden flag will enable the showHidden option in util.inspect.`,
+				`The --lang and --language flags allow different syntax highlight for the output.`,
+				`The --json flag converts the output to json`,
+				`The --no-timeout flag disables the timeout`,
 				`If the output is too large, it'll send the output as a file, or in the console if the bot does not have the ATTACH_FILES permission.`
 			].join(`\n`),
-			COMMAND_EVAL_ERROR: (time, output, type) => `**Error**:${output}\n**Type**:${type}\n${time}`,
-			COMMAND_EVAL_OUTPUT: (time, output, type) => `**Output**:${output}\n**Type**:${type}\n${time}`,
-			COMMAND_EVAL_SENDFILE: (time, type) => `${minus} Output was too long... sent the result as a file.\n**Type**:${type}\n${time}`,
-			COMMAND_EVAL_SENDCONSOLE: (time, type) => `${minus} Output was too long... sent the result to console.\n**Type**:${type}\n${time}`,
-			COMMAND_UNLOAD: (type, name) => `${ye} Unloaded ${type}: ${name}`,
+			COMMAND_EVAL_TIMEOUT: (seconds) => `${no} TIMEOUT: Took longer than ${seconds} seconds.`,
+			COMMAND_EVAL_ERROR: (time, output, type) => `${no} **Error**:${output}\n**Type**:${type}\n${time}`,
+			COMMAND_EVAL_OUTPUT: (time, output, type) => `${ye} **Output**:${output}\n**Type**:${type}\n${time}`,
+			COMMAND_EVAL_OUTPUT_CONSOLE: (time, type) => `${ye} Sent the result to console.\n**Type**:${type}\n${time}`,
+			COMMAND_EVAL_OUTPUT_FILE: (time, type) => `${ye} Sent the result as a file.\n**Type**:${type}\n${time}`,
+			COMMAND_EVAL_OUTPUT_HASTEBIN: (time, url, type) => `${ye} Sent the result to hastebin: ${url}\n**Type**:${type}\n${time}\n`,
+			
 			COMMAND_UNLOAD_DESCRIPTION: `Unloads the klasa piece.`,
+			COMMAND_UNLOAD: (type, name) => `${ye} Unloaded ${type}: ${name}`,
 			COMMAND_UNLOAD_WARN: `${no} You probably don't want to unload that, since you wouldn't be able to run any command to enable it again`,
+			
+			COMMAND_TRANSFER_DESCRIPTION: `Transfers a core piece to its respective folder.`,
 			COMMAND_TRANSFER_ERROR: `${no} That file has been transfered already or never existed.`,
 			COMMAND_TRANSFER_SUCCESS: (type, name) => `${ye} Successfully transferred ${type}: ${name}.`,
 			COMMAND_TRANSFER_FAILED: (type, name) => `${ye} Transfer of ${type}: ${name} to Client has failed. Please check your Console.`,
-			COMMAND_TRANSFER_DESCRIPTION: `Transfers a core piece to its respective folder.`,
+			
+			COMMAND_RELOAD_DESCRIPTION: `Reloads a klasa piece, or all pieces of a klasa store.`,
 			COMMAND_RELOAD: (type, name, time) => `${ye} Reloaded ${type}: ${name}. (Took: ${time})`,
 			COMMAND_RELOAD_FAILED: (type, name) => `${no} Failed to reload ${type}: ${name}. Please check your Console.`,
 			COMMAND_RELOAD_ALL: (type, time) => `${ye} Reloaded all ${type}. (Took: ${time})`,
 			COMMAND_RELOAD_EVERYTHING: (time) => `${ye} Reloaded everything. (Took: ${time})`,
-			COMMAND_RELOAD_DESCRIPTION: `Reloads a klasa piece, or all pieces of a klasa store.`,
-			COMMAND_REBOOT: `${ye} Rebooting...`,
+			
 			COMMAND_REBOOT_DESCRIPTION: `Reboots the bot.`,
+			COMMAND_REBOOT: `${ye} Rebooting...`,
+			
+			COMMAND_LOAD_DESCRIPTION: `Load a piece from your bot.`,
 			COMMAND_LOAD: (time, type, name) => `${ye} Successfully loaded ${type}: ${name}. (Took: ${time})`,
 			COMMAND_LOAD_FAIL: `${no} The file does not exist, or an error occurred while loading your file. Please check your console.`,
 			COMMAND_LOAD_ERROR: (type, name, error) => `${no} Failed to load ${type}: ${name}. Reason:${util.codeBlock(`js`, error)}`,
-			COMMAND_LOAD_DESCRIPTION: `Load a piece from your bot.`,
-			COMMAND_PING: `${minus} Ping?`,
+			
 			COMMAND_PING_DESCRIPTION: `Runs a connection test to Discord.`,
+			COMMAND_PING: `${minus} Ping?`,
 			COMMAND_PINGPONG: (diff, ping) => `${ye} Pong! (Roundtrip took: ${diff}ms. Heartbeat: ${ping}ms.)`,
+			
 			COMMAND_INVITE: () => [
 				`To add ${this.client.user.username} to your discord guild:`,
 				`<${this.client.invite}>`,
@@ -124,7 +148,9 @@ module.exports = class extends Language {
 					`If you try to use a command that requires more permissions than the bot is granted, it will let you know.`
 				].join(` `))
 			],
+
 			COMMAND_INVITE_DESCRIPTION: `Displays the join guild link of the bot.`,
+
 			COMMAND_INFO: [
 				"Klasa is a `plug-and-play` framework built on top of the Discord.js library.",
 				`Most of the code is modularized, which allows developers to edit Klasa to suit their needs.`,
@@ -144,19 +170,25 @@ module.exports = class extends Language {
 				`We hope to be a 100% customizable framework that can cater to all audiences. We do frequent updates and bugfixes when available.`,
 				"If you`re interested in us, check us out at https://klasa.js.org"
 			],
+			
 			COMMAND_CONF_USER_DESCRIPTION: `Change your private settings.`,
+			
 			COMMAND_INFO_DESCRIPTION: `Provides some information about this bot.`,
+			
 			COMMAND_HELP_DESCRIPTION: `Display help for a command.`,
 			COMMAND_HELP_NO_EXTENDED: `No extended help available.`,
 			COMMAND_HELP_DM: `${inbox} The list of commands you have access to has been sent to your DMs.`,
 			COMMAND_HELP_NODM: `${no} You have DMs disabled, I couldn't send you the commands in DMs.`,
 			COMMAND_HELP_USAGE: (usage) => `Usage :: ${usage}`,
 			COMMAND_HELP_EXTENDED: `Extended Help ::`,
-			COMMAND_ENABLE: (type, name) => `+ Successfully enabled ${type}: ${name}`,
+			
 			COMMAND_ENABLE_DESCRIPTION: `Re-enables or temporarily enables a command/inhibitor/monitor/finalizer. Default state restored on reboot.`,
-			COMMAND_DISABLE: (type, name) => `+ Successfully disabled ${type}: ${name}`,
+			COMMAND_ENABLE: (type, name) => `+ Successfully enabled ${type}: ${name}`,
+			
 			COMMAND_DISABLE_DESCRIPTION: `Re-disables or temporarily disables a command/inhibitor/monitor/finalizer/event. Default state restored on reboot.`,
+			COMMAND_DISABLE: (type, name) => `+ Successfully disabled ${type}: ${name}`,
 			COMMAND_DISABLE_WARN: `${no} You probably don't want to disable that, since you wouldn't be able to run any command to enable it again`,
+			
 			COMMAND_STATS: (memUsage, uptime, users, guilds, channels, klasaVersion, discordVersion, processVersion, message) => [
 				`**__${this.client.user.tag}'s statistics__**`,
 				``,
@@ -170,18 +202,38 @@ module.exports = class extends Language {
 				`• Node.js: \`${processVersion}\``,
 				`• Shards: \`${(message.guild ? message.guild.shardID : 0) + 1} / ${this.client.options.totalShardCount}\``
 			].join(`\n`),
+
 			COMMAND_STATS_DESCRIPTION: `Provides some details about the bot and stats.`,
+
 			COMMAND_PREFIX_DESCRIPTION: `Set, Reset or Get the bot's prefix(es) in this guild.`,
+
 			COMMAND_LANGUAGE_DESCRIPTION: `Set, Reset or Get the bot's language in this guild.`,
+
 			CONFIG_NOVALUE: `${dataNo} You must provide a value.`,
 			CONFIG_SET_SUCCESS: (key, value) => `${dataYe} The key **${key}** has been set to **${util.regExpEsc(value.join(` `))}**.`,
+			CONFIG_ALREADY_EXISTS: (key, value) => `${dataNo} The value **${util.regExpEsc(value.join(` `))}** already exists in key **${key}**.`,
+			CONFIG_ADD_UNSUCCESS: (key, value, max) => `${dataNo} You cannot add the value **${util.regExpEsc(value.join(` `))}** from **${key}**: You can't have more than **${max} ${key}es**.`,
 			CONFIG_ADD_SUCCESS: (key, value) => `${dataPlus} The value **${util.regExpEsc(value.join(` `))}** has been added to **${key}**.`,
-			CONFIG_REMOVE_UNSUCCESS: (key, value) => `${dataNo} You cannot delete the value **${util.regExpEsc(value.join(` `))}** from **${key}** or it won't have any value.`,
+			CONFIG_REMOVE_UNSUCCESS: (key, value, min) => `${dataNo} You cannot delete the value **${util.regExpEsc(value.join(` `))}** from **${key}**: You can't have less than **${min} ${key}**.`,
 			CONFIG_REMOVE_SUCCESS: (key, value) => `${dataMinus} The value **${util.regExpEsc(value.join(` `))}** has been removed from **${key}**.`,
 			CONFIG_NOT_TYPE: (key) => `${dataNo} The key **${key}** must be a valid **${key} name**.`,
 			CONFIG_SHOW: (key, value) => `${dataGet} Value of the key **${key}** is \`${Array.isArray(value) ? value.join(`, `).length > 0 ? value.join(`\`, \``) : `@${this.client.user.tag}` : value}\`.`,
 			CONFIG_RESET_SUCCESS: (key) => `${dataYe} The key **${key}** has been reset to default.`,
-			REQUESTED: (tag) => `Requested by ${tag}`
+			
+			REQUESTED: (tag) => `Requested by ${tag}`,
+
+			COMMAND_CAT_DESCRIPTION: `Sends a random cat picture or gif.`,
+			COMMAND_CAT_TITLE: (animal) => `Here's a beautiful ${animal} picture!`,
+
+			COMMAND_DOG_DESCRIPTION: `Sends a random dog picture or gif.`,
+			COMMAND_DOG_TITLE: (animal) => `Here's a beautiful ${animal} picture!`,
+
+			COMMAND_PLAY_DESCRIPTION: `Play music from a Youtube link in your voice channel.`,
+			COMMAND_PLAY_NOVOICE: `${no} You need to be in a voice channel in order to play music!`,
+			COMMAND_PLAY_NOPERM: (perm) => `${no} I don't have the permission to **${perm == 'speak' ? 'speak** in' : 'connect** to'} this channel!`,
+			COMMAND_PLAY_ERRCON: `${no} I couldn't join the voice channel you're on.`,
+			COMMAND_MUSIC_ENDED: `${ye} The song ended!`,
+			COMMAND_MUSIC_ERROR: (error) => `${no} I'm sorry, an error occured: \`\`\`js\n${error}\`\`\``
 		};
 	}
 
