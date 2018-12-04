@@ -5,6 +5,7 @@ module.exports = class extends Command {
 
 	constructor(...args) {
 		super(...args, {
+            runIn: ['text'],
             cooldown: 3,
             aliases: ['pl', 'music'],
 			description: language => language.get('COMMAND_PLAY_DESCRIPTION'),

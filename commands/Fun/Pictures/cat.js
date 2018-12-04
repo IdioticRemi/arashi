@@ -21,7 +21,7 @@ module.exports = class extends Command {
 			.setTimestamp()
 			.setFooter(message.language.get('REQUESTED', [message.author.tag]), message.author.avatarURL())
 			.setImage(file)
-			.setAuthor(message.language.get('COMMAND_CAT_TITLE', ['cat']), 'http://www.stickpng.com/assets/images/587e31f49686194a55adab6e.png');
+			.setAuthor(message.language.get('COMMAND_ANIMAL_TITLE', ['cat']), 'http://www.stickpng.com/assets/images/587e31f49686194a55adab6e.png');
 
         return message.send(embed);
     }

@@ -222,11 +222,11 @@ module.exports = class extends Language {
 			
 			REQUESTED: (tag) => `Requested by ${tag}`,
 
+			COMMAND_ANIMAL_TITLE: (animal) => `Here's a beautiful ${animal} picture!`,
+			
 			COMMAND_CAT_DESCRIPTION: `Sends a random cat picture or gif.`,
-			COMMAND_CAT_TITLE: (animal) => `Here's a beautiful ${animal} picture!`,
 
 			COMMAND_DOG_DESCRIPTION: `Sends a random dog picture or gif.`,
-			COMMAND_DOG_TITLE: (animal) => `Here's a beautiful ${animal} picture!`,
 
 			COMMAND_PLAY_DESCRIPTION: `Play music from a Youtube link in your voice channel.`,
 			COMMAND_PLAY_NOVOICE: `${no} You need to be in a voice channel in order to play music!`,
