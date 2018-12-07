@@ -23,8 +23,10 @@
     "erlpack": "github:discordapp/erlpack",
     "firebase-admin": "^6.3.0",
     "klasa": "github:dirigeants/klasa",
+    "moment": "^2.22.2",
     "node-fetch": "^2.3.0",
     "node-opus": "^0.3.1",
+    "simple-youtube-api": "^5.1.1",
     "sodium": "^3.0.2",
     "ytdl-core": "^0.28.0",
     "zlib-sync": "^0.1.4"

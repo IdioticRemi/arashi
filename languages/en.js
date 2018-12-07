@@ -6,6 +6,16 @@ const ye = `<:ye:518161458874286112>`,
 	minus = `<:minus:518160306036539407>`,
 	gears = `<:gears:517743812039409674>`,
 	yt = `<:youtube:518153001370910720>`,
+	play = `<:play:519910928041639947>`,
+	stop = `<:stop:519910927949365288>`,
+	pause = `<:pause:519910928142041098>`,
+	resume = `<:resume:519911829619867688>`,
+	vol = `<:volume:519969203801817088>`,
+	volMin = `<:volMinus:519969203881508914>`,
+	volPlus = `<:volPlus:519969203655147520>`,
+	next = `<:next:519910927869673512>`,
+	prev = `<:prev:519910927794176021>`,
+	add = `<:add:519969204321910784>`,
 	inbox = `<:koolInbox:518153001265790986>`,
 	dataGet = `<:dataGet:518176907582505002>`,
 	dataYe = `<:dataYe:518149292049956891>`,
@@ -212,6 +222,7 @@ module.exports = class extends Language {
 			CONFIG_NOVALUE: `${dataNo} You must provide a value.`,
 			CONFIG_SET_SUCCESS: (key, value) => `${dataYe} The key **${key}** has been set to **${util.regExpEsc(value.join(` `))}**.`,
 			CONFIG_ALREADY_EXISTS: (key, value) => `${dataNo} The value **${util.regExpEsc(value.join(` `))}** already exists in key **${key}**.`,
+			CONFIG_DOESNT_EXIST: (key, value) => `${dataNo} Value **${util.regExpEsc(value.join(` `))}** does not exist in key **${key}**.`,
 			CONFIG_ADD_UNSUCCESS: (key, value, max) => `${dataNo} You cannot add the value **${util.regExpEsc(value.join(` `))}** from **${key}**: You can't have more than **${max} ${key}es**.`,
 			CONFIG_ADD_SUCCESS: (key, value) => `${dataPlus} The value **${util.regExpEsc(value.join(` `))}** has been added to **${key}**.`,
 			CONFIG_REMOVE_UNSUCCESS: (key, value, min) => `${dataNo} You cannot delete the value **${util.regExpEsc(value.join(` `))}** from **${key}**: You can't have less than **${min} ${key}**.`,
@@ -227,13 +238,60 @@ module.exports = class extends Language {
 			COMMAND_CAT_DESCRIPTION: `Sends a random cat picture or gif.`,
 
 			COMMAND_DOG_DESCRIPTION: `Sends a random dog picture or gif.`,
+			
+			MUSIC_PLAY_ENDED: `${stop} There's no more song in the queue. Stopped playing music.`,
+			MUSIC_PLAY_ERROR: (error) => `${no} I'm sorry, an error occured: \`\`\`js\n${error}\`\`\``,
+			MUSIC_PLAY_SONG: (title, tag, author) => `${play} Playing **${title}** by **${author}** | Requested by **${tag}**.`,
+			MUSIC_QUEUEADD_PLAYLIST: (title, author) => `${add} Playlist **${title}** by **${author}** has been added to the queue.`,
+			MUSIC_NOT_PLAYING: `${no} Music is currently not running on this server.`,
 
-			COMMAND_PLAY_DESCRIPTION: `Play music from a Youtube link in your voice channel.`,
+			COMMAND_PLAY_DESCRIPTION: `Play music from Youtube (url (playlist or video) or a video's title) in your voice channel.`,
 			COMMAND_PLAY_NOVOICE: `${no} You need to be in a voice channel in order to play music!`,
 			COMMAND_PLAY_NOPERM: (perm) => `${no} I don't have the permission to **${perm == 'speak' ? 'speak** in' : 'connect** to'} this channel!`,
 			COMMAND_PLAY_ERRCON: `${no} I couldn't join the voice channel you're on.`,
-			COMMAND_MUSIC_ENDED: `${ye} The song ended!`,
-			COMMAND_MUSIC_ERROR: (error) => `${no} I'm sorry, an error occured: \`\`\`js\n${error}\`\`\``
+			COMMAND_PLAY_QUEUEADD: (title, author) => `${add} Added **${title}** by **${author}** to the queue.`,
+			PLAY_NO_RESULTS: (name) => `${no} I'm sorry, I found no results for "**${name}**".`,
+			
+			COMMAND_LEAVE_DESCRIPTION: `Leave the voice channel you're in when playing music.`,
+			COMMAND_LEAVE_NOVOICE: (channel) => `${no} You need to be inside the **${channel}** channel in order to stop music!`,
+			COMMAND_LEAVE_SUCCESS: (channel) => `${stop} Successfuly left the **${channel}** channel.`,
+
+			COMMAND_SKIP_DESCRIPTION: `Skip the current song when playing music.`,
+			COMMAND_SKIP_NOVOICE: (channel) => `${no} You need to be inside the **${channel}** channel in order to skip the song!`,
+			COMMAND_SKIP_SUCCESS: (title, tag) => `${next} Skipped **${title}** | User: **${tag}**.`,
+
+			COMMAND_PREV_DESCRIPTION: `Play the previous song when playing music.`,
+			COMMAND_PREV_NOVOICE: (channel) => `${no} You need to be inside the **${channel}** channel in order to play the previous song!`,
+			COMMAND_PREV_NOPE: `${prev} There is no previous song I could play.`,
+			COMMAND_PREV_SUCCESS: (title, tag) => `${prev} Playing previous song (**${title}**) | User: **${tag}**.`,
+
+			COMMAND_NOW_DESCRIPTION: `See what's the current song's name when playing music.`,
+			COMMAND_NOW_SUCCESS: (title, tag) => `${play} Now Playing: **${title}**, requested by **${tag}**.`,
+
+			COMMAND_NOW_DESCRIPTION: `See or change the volume when playing music.`,
+			COMMAND_VOLUME_VAL: (volume) => `${vol} Current volume is **${volume}%**`,
+			COMMAND_VOLUME_NOPE: `${no} Volume's value must be included between **0%** and **200%**.`,
+			COMMAND_VOLUME_SUCCESS: (old, volume, tag) => `${old > volume ? volMin : old == volume ? vol :volPlus} Changed volume's value from **${old}%** to **${volume}%** | User: **${tag}**.`,
+		
+			COMMAND_QUEUE_DESCRIPTION: `See what's in the queue when playing music.`,
+			COMMAND_QUEUE_TITLE: (guild) => `Music Queue: ${guild}`,
+			COMMAND_QUEUE_EMPTY: `Queue is empty...`,
+			COMMAND_QUEUE_PREV: `Previous song`,
+			COMMAND_QUEUE_NOPREV: `No previous song...`,
+			COMMAND_QUEUE_NOW: `Now Playing`,
+			COMMAND_QUEUE_NEXT: `Next Songs`,
+			COMMAND_QUEUE_PAUSED: ` (PAUSED)`,
+			COMMAND_QUEUE_MORESONGS: (amount) => `\n# And ${amount} more songs...`,
+
+			COMMAND_PAUSE_DESCRIPTION: `Pause the current song when playing music.`,
+			COMMAND_PAUSE_NOVOICE: (channel) => `${no} You need to be inside the **${channel}** channel in order to pause the current song!`,
+			COMMAND_PAUSE_PAUSED: `${no} The song is already paused!`,
+			COMMAND_PAUSE_SUCCESS: (title, tag) => `${pause} Paused **${title}** | User: **${tag}**.`,
+
+			COMMAND_RESUME_DESCRIPTION: `Resume the current song when playing music.`,
+			COMMAND_RESUME_NOVOICE: (channel) => `${no} You need to be inside the **${channel}** channel in order to resume the current song!`,
+			COMMAND_RESUME_PLAYING: `${no} The song is already playing!`,
+			COMMAND_RESUME_SUCCESS: (title, tag) => `${resume} Resumed **${title}** | User: **${tag}**.`,
 		};
 	}
 

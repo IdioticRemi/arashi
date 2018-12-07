@@ -36,6 +36,7 @@ module.exports = class extends Command {
     async remove(message, [...value]) {
         const prefixes = await message.guild.settings.get('prefix');
         if (prefixes.length == 1) return message.sendLocale('CONFIG_REMOVE_UNSUCCESS', ['prefix', value, 1]);
+        if (!prefixes.includes(value.join(' '))) return message.sendLocale('CONFIG_DOESNT_EXIST', ['prefix', value]);
         await message.guild.settings.update('prefix', value.join(' '), { action: 'remove' });
         message.sendLocale('CONFIG_REMOVE_SUCCESS', ['prefix', value]);
     }
