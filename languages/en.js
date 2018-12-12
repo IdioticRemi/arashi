@@ -274,9 +274,10 @@ module.exports = class extends Language {
 			COMMAND_VOLUME_NOPE: `${no} Volume's value must be included between **0%** and **200%**.`,
 			COMMAND_VOLUME_SUCCESS: (old, volume, tag) => `${old > volume ? volMin : old == volume ? vol :volPlus} Changed volume's value from **${old}%** to **${volume}%** | User: **${tag}**.`,
 		
-			COMMAND_QUEUE_DESCRIPTION: `See what's in the queue when playing music.`,
-			COMMAND_QUEUE_TITLE: (guild) => `Music Queue: ${guild}`,
-			COMMAND_QUEUE_TITLE_BETA: `MUSIC QUEUE FOR`,
+			COMMAND_QUEUE_DESCRIPTION: `See what's in the queue (image version) when playing music.`,
+			COMMAND_EQUEUE_DESCRIPTION: `See what's in the queue (embed version) when playing music.`,
+			COMMAND_EQUEUE_TITLE: (guild) => `Music Queue: ${guild}`,
+			COMMAND_QUEUE_TITLE: `MUSIC QUEUE FOR`,
 			COMMAND_QUEUE_EMPTY: `Queue is empty...`,
 			COMMAND_QUEUE_NOPREV: `No previous song...`,
 			COMMAND_QUEUE_PREV: `PREVIOUS SONG`,
