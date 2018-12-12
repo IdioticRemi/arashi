@@ -16,6 +16,7 @@ const ye = `<:ye:518161458874286112>`,
 	next = `<:next:519910927869673512>`,
 	prev = `<:prev:519910927794176021>`,
 	add = `<:add:519969204321910784>`,
+	shuffle = `<:shuffle:522318100536885249>`,
 	inbox = `<:koolInbox:518153001265790986>`,
 	dataGet = `<:dataGet:518176907582505002>`,
 	dataYe = `<:dataYe:518149292049956891>`,
@@ -275,13 +276,14 @@ module.exports = class extends Language {
 		
 			COMMAND_QUEUE_DESCRIPTION: `See what's in the queue when playing music.`,
 			COMMAND_QUEUE_TITLE: (guild) => `Music Queue: ${guild}`,
+			COMMAND_QUEUE_TITLE_BETA: `MUSIC QUEUE FOR`,
 			COMMAND_QUEUE_EMPTY: `Queue is empty...`,
-			COMMAND_QUEUE_PREV: `Previous song`,
 			COMMAND_QUEUE_NOPREV: `No previous song...`,
-			COMMAND_QUEUE_NOW: `Now Playing`,
-			COMMAND_QUEUE_NEXT: `Next Songs`,
+			COMMAND_QUEUE_PREV: `PREVIOUS SONG`,
+			COMMAND_QUEUE_NOW: `NOW PLAYING`,
+			COMMAND_QUEUE_NEXT: `NEXT SONG(S)`,
 			COMMAND_QUEUE_PAUSED: ` (PAUSED)`,
-			COMMAND_QUEUE_MORESONGS: (amount) => `\n# And ${amount} more songs...`,
+			COMMAND_QUEUE_MORESONGS: (amount) => `\nAnd ${amount} more song(s)...`,
 
 			COMMAND_PAUSE_DESCRIPTION: `Pause the current song when playing music.`,
 			COMMAND_PAUSE_NOVOICE: (channel) => `${no} You need to be inside the **${channel}** channel in order to pause the current song!`,
@@ -292,6 +294,17 @@ module.exports = class extends Language {
 			COMMAND_RESUME_NOVOICE: (channel) => `${no} You need to be inside the **${channel}** channel in order to resume the current song!`,
 			COMMAND_RESUME_PLAYING: `${no} The song is already playing!`,
 			COMMAND_RESUME_SUCCESS: (title, tag) => `${resume} Resumed **${title}** | User: **${tag}**.`,
+
+			COMMAND_SHUFFLE_DESCRIPTION: `Shuffle the queue when playing music (keeps previous songs)`,
+			COMMAND_SHUFFLE_NOVOICE: (channel) => `${no} You need to be inside the **${channel}** channel in order to shuffle the queue!`,
+			COMMAND_SHUFFLE_SUCCESS: `${shuffle} Successfuly shuffled the queue.`,
+
+			COMMAND_REPEAT_DESCRIPTION: `Change repeat status when playing music (song or guild or disabled)`,
+			COMMAND_REPEAT_NOVOICE: (channel) => `${no} You need to be inside the **${channel}** channel in order to change the repeat status!`,
+			COMMAND_REPEAT_SONG: `Repeat is **enabled** for the current **song**.`,
+			COMMAND_REPEAT_QUEUE: `Repeat is **enabled** for the current **queue**.`,
+			COMMAND_REPEAT_DISABLED: `Repeat is **disabled** for both queue and song.`,
+			COMMAND_REPEAT_SUCCESS: (s, tag) => `Repeat has beed **${s == 'D' ? 'disabled' : 'enabled'}** for **${s == 'D' ? 'both queue and song' : s == 'Q' ? 'queue' : 'song'}**.`,
 		};
 	}
 

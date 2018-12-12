@@ -19,6 +19,8 @@
   "homepage": "https://github.com/Kizuru/Arashi#readme",
   "dependencies": {
     "bufferutil": "^4.0.0",
+    "canvas": "github:Automattic/node-canvas#92b192447e9b9ae98da0f801e4e34afdd1dc1ef8",
+    "canvas-constructor": "^2.0.1",
     "discord.js": "github:discordjs/discord.js",
     "erlpack": "github:discordapp/erlpack",
     "firebase-admin": "^6.3.0",
@@ -27,6 +29,7 @@
     "node-fetch": "^2.3.0",
     "node-opus": "^0.3.1",
     "simple-youtube-api": "^5.1.1",
+    "snekfetch": "^4.0.4",
     "sodium": "^3.0.2",
     "ytdl-core": "^0.28.0",
     "zlib-sync": "^0.1.4"

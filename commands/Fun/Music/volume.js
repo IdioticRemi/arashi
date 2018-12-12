@@ -25,7 +25,7 @@ module.exports = class extends Command {
 
         const old = sQueue.volume;
         sQueue.volume = volume;
-        await sQueue.connection.dispatcher.setVolumeLogarithmic(volume / 100);
+        await sQueue.connection.dispatcher.setVolumeLogarithmic(volume / 200);
         return message.sendLocale('COMMAND_VOLUME_SUCCESS', [old, volume, message.author.tag]);
     }
 }

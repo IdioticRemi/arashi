@@ -96,26 +96,31 @@ module.exports = class extends Command {
         const sQueue = this.client.queues.get(message.guild.id);
 
         if (!song) {
-            sQueue.voice.leave();
-            return this.client.queues.delete(message.guild.id);
+            if (sQueue.repeat == true) {
+                if (sQueue.songs.length == 0) { 
+                    sQueue.text.send(message.language.get('MUSIC_PLAY_ENDED'));
+                    sQueue.voice.leave();
+                    return this.client.queues.delete(message.guild.id);
+                }
+                sQueue.songID = 0;
+                return this.play(message, sQueue.songs[sQueue.songID]);
+            } else {
+                sQueue.text.send(message.language.get('MUSIC_PLAY_ENDED'));
+                sQueue.voice.leave();
+                return this.client.queues.delete(message.guild.id);
+            }
         }
 
         sQueue.text.send(message.language.get('MUSIC_PLAY_SONG', song.title, song.user.tag, song.author));
 
         const dispatcher = sQueue.connection.play(ytdl(song.url))
             .on('end', () => {
-                if (!sQueue.songs[sQueue.songID + 1]) {
-                    sQueue.songID = sQueue.songID + 1;
-                    sQueue.text.send(message.language.get('MUSIC_PLAY_ENDED'));
-                    return this.play(message, sQueue.songs[sQueue.songID]);
-                }
-                sQueue.songID = sQueue.songID + 1;
+                sQueue.songs.length > 0 && sQueue.songs[sQueue.songID].repeat == true ? sQueue.songID = sQueue.songID : sQueue.songID = sQueue.songID + 1;
                 return this.play(message, sQueue.songs[sQueue.songID]);
             }).on('error', err => {
                 sQueue.text.send(message.language.get('MUSIC_PLAY_ERROR', [err]));
                 this.client.console.error(err);
-            });
-        dispatcher.setVolumeLogarithmic(1);
+            }).setVolumeLogarithmic(sQueue.volume / 200);
     }
 
 };
