@@ -13,7 +13,7 @@ Arashi is a public Discord bot that uses Klasa framework to work around with dis
 npm install
 ```
 3. Change the name of the file `"public-config.js"` to be `"config.js"`.
-4. Put your bot token in file `config.js`. (the one you just changed the name)
+4. Put your bot token, your GoogleAPI key and your Firebase connection details in file `config.js`. (the one you just changed the name)
 5. Execute the bot using: 
 ```node
 node arashi.js
