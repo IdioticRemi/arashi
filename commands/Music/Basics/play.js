@@ -37,7 +37,17 @@ module.exports = class extends Command {
         if (!perms.has('CONNECT')) return message.sendLocale('COMMAND_PLAY_NOPERM', ['connect']);
         if (!perms.has('SPEAK')) return message.sendLocale('COMMAND_PLAY_NOPERM', ['speak']);
 
-        if (url.match(/^https?:\/\/(www.youtube.com|youtube.com)\/playlist(.*)$/)) {
+        if (message.author.settings.playlists[searchString]) {
+            const playlist = message.author.settings.playlists[searchString];
+
+            for (const video of Object.values(playlist)) {
+                const vid = await this.yt.getVideo(video.url).catch(error => { return; });
+                if (!vid) continue;
+                await this.handleVideo(vid, message, voice, true);
+            }
+
+            return await message.sendLocale('MUSIC_QUEUEADD_PLAYLIST', [searchString, message.author.tag]);
+        } else if (url.match(/^https?:\/\/(www.youtube.com|youtube.com)\/playlist(.*)$/)) {
             const playlist = await this.yt.getPlaylist(url);
             const videos = await playlist.getVideos();
 

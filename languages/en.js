@@ -18,6 +18,7 @@ const ye = `<:ye:518161458874286112>`,
 	add = `<:add:519969204321910784>`,
 	shuffle = `<:shuffle:522318100536885249>`,
 	inbox = `<:koolInbox:518153001265790986>`,
+	sushi = `<:sushih:517743805663936512>`,
 	dataGet = `<:dataGet:518176907582505002>`,
 	dataYe = `<:dataYe:518149292049956891>`,
 	dataNo = `<:dataNo:518149291852693592>`,
@@ -220,7 +221,7 @@ module.exports = class extends Language {
 
 			COMMAND_LANGUAGE_DESCRIPTION: `Set, Reset or Get the bot's language in this guild.`,
 
-			CONFIG_NOVALUE: `${dataNo} You must provide a value.`,
+			CONFIG_NOVALUE: `${no} You must provide a value.`,
 			CONFIG_SET_SUCCESS: (key, value) => `${dataYe} The key **${key}** has been set to **${util.regExpEsc(value.join(` `))}**.`,
 			CONFIG_ALREADY_EXISTS: (key, value) => `${dataNo} The value **${util.regExpEsc(value.join(` `))}** already exists in key **${key}**.`,
 			CONFIG_DOESNT_EXIST: (key, value) => `${dataNo} Value **${util.regExpEsc(value.join(` `))}** does not exist in key **${key}**.`,
@@ -296,16 +297,40 @@ module.exports = class extends Language {
 			COMMAND_RESUME_PLAYING: `${no} The song is already playing!`,
 			COMMAND_RESUME_SUCCESS: (title, tag) => `${resume} Resumed **${title}** | User: **${tag}**.`,
 
-			COMMAND_SHUFFLE_DESCRIPTION: `Shuffle the queue when playing music (keeps previous songs)`,
+			COMMAND_SHUFFLE_DESCRIPTION: `Shuffle the queue when playing music.`,
 			COMMAND_SHUFFLE_NOVOICE: (channel) => `${no} You need to be inside the **${channel}** channel in order to shuffle the queue!`,
 			COMMAND_SHUFFLE_SUCCESS: `${shuffle} Successfuly shuffled the queue.`,
 
-			COMMAND_REPEAT_DESCRIPTION: `Change repeat status when playing music (song or guild or disabled)`,
+			COMMAND_REPEAT_DESCRIPTION: `Change repeat status when playing music.`,
 			COMMAND_REPEAT_NOVOICE: (channel) => `${no} You need to be inside the **${channel}** channel in order to change the repeat status!`,
 			COMMAND_REPEAT_SONG: `Repeat is **enabled** for the current **song**.`,
 			COMMAND_REPEAT_QUEUE: `Repeat is **enabled** for the current **queue**.`,
 			COMMAND_REPEAT_DISABLED: `Repeat is **disabled** for both queue and song.`,
 			COMMAND_REPEAT_SUCCESS: (s, tag) => `Repeat has beed **${s == 'D' ? 'disabled' : 'enabled'}** for **${s == 'D' ? 'both queue and song' : s == 'Q' ? 'queue' : 'song'}**.`,
+			
+			COMMAND_PLAYLIST_DESCRIPTION: `Create, Delete, Get or list your personnal playlists.`,
+			COMMAND_PLAYLIST_CREATE_CHARLIMIT: `${no} The playlist's name may not exceed 50 characters.`,
+			COMMAND_PLAYLIST_CREATE_USERLIMIT: `${no} Your max playlist amount is **2**`,
+			COMMAND_PLAYLIST_CREATE_VIPLIMIT: `${no} Your max playlist amount is **20**.`,
+			COMMAND_PLAYLIST_CREATE_SUCCESS: (playlist) => `${dataPlus} The playlist **${playlist}** has been **created**!`,
+			COMMAND_PLAYLIST_DELETE_SUCCESS: (playlist) => `${dataMinus} The playlist **${playlist}** has been **deleted**!`,
+			COMMAND_PLAYLIST_MORESONGS: (rest) => `\n**and ${rest} more songs...**`,
+			COMMAND_PLAYLIST_TITLEGET: (tag, title) => `${tag}'s playlist: ${title}`,
+			COMMAND_PLAYLIST_TITLELIST: (tag) => `${tag}'s personal playlists`,
+			COMMAND_PLAYLIST_NULL: (playlist) => `${no} The playlist **${playlist}** does not exist!`,
+			COMMAND_PLAYLIST_NOTANY: `${no} You don't have any playlist!`,
+		
+			COMMAND_ANNOUNCE_DESCRIPTION: `Send a message that mentions everyone in the specified channel`,
+			COMMAND_ANNOUNCE_NOCHANNEL: `${no} You must provide a **channel ID** or a **channel mention**.`,
+			COMMAND_ANNOUNCE_SUCCESS: (channel) => `${ye} Successfuly sent the message to ${channel}.`,
+
+			COMMAND_AMIVIP_DESCRIPTION: `Get your VIP advantages if you are one. If you are-- SURPRISE!`,
+			COMMAND_AMIVIP_ALREADY: `\\🍣👌\\🍣 You already got your glorious welcome! Thanks for being a VIP but-- You can't run this again!`,
+			COMMAND_AMIVIP_NOTONSERVER: `\\🍣 You're not a real member of our community! (join here: https://discord.gg/kaZ2jf8)`,
+			COMMAND_AMIVIP_NOTVIP: `\\🍣 **YOU SHALL NOT PASS!** (You don't have the VIP role on the official server)`,
+			COMMAND_AMIVIP_TITLE: `🍣 A NEW MEMBER BECAME A VIP USER! YAY!!`,
+			COMMAND_AMIVIP_YOUARE: (tag) => `🍣 Welcome to **${tag}** in the VIP users community! *yay* 🍣`
+
 		};
 	}
 

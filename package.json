@@ -24,7 +24,7 @@
     "discord.js": "github:discordjs/discord.js",
     "erlpack": "github:discordapp/erlpack",
     "firebase-admin": "^6.3.0",
-    "klasa": "github:dirigeants/klasa",
+    "klasa": "github:dirigeants/Klasa",
     "moment": "^2.22.2",
     "node-fetch": "^2.3.0",
     "node-opus": "^0.3.1",
