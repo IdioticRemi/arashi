@@ -16,34 +16,35 @@ module.exports = class extends Command {
 
         this.createCustomResolver('value', (arg, possible, message, [action]) => {
             if (!['add', 'remove'].includes(action) || arg) return arg;
-            throw message.language.get('CONFIG_NOVALUE');
+            throw message.language.get('COMMAND_PREFIX_VALUE');
         });
     }
 
     async show(message) {
         const value = await message.guild.settings.get('prefix');
-        message.sendLocale('CONFIG_SHOW', ['prefix', value]);
+        message.sendLocale('COMMAND_PREFIX_SHOW', [value]);
     }
 
-    async add(message, [...value]) {
+    async add(message, [value]) {
         const prefixes = await message.guild.settings.get('prefix');
-        if (prefixes.length == 5) return message.sendLocale('CONFIG_ADD_UNSUCCESS', ['prefix', value, 5]);
-        if (prefixes.includes(value.join(' '))) return message.sendLocale('CONFIG_ALREADY_EXISTS', ['prefix', value]);
-        await message.guild.settings.update('prefix', value.join(' '), { action: 'add' });
-        message.sendLocale('CONFIG_ADD_SUCCESS', ['prefix', value]);
+        if (message.author.settings.vip == false && prefixes.length >= 2) return message.sendLocale('COMMAND_PREFIX_USERMAX', [value]);
+        else if (prefixes.length >= 10) return message.sendLocale('COMMAND_PREFIX_VIPMAX', [value]);
+        if (prefixes.includes(value)) return message.sendLocale('COMMAND_PREFIX_DOESNT_EXIST', [value]);
+        await message.guild.settings.update('prefix', value, { action: 'add' });
+        message.sendLocale('COMMAND_PREFIX_ADD_SUCCESS', [value]);
     }
 
-    async remove(message, [...value]) {
+    async remove(message, [value]) {
         const prefixes = await message.guild.settings.get('prefix');
-        if (prefixes.length == 1) return message.sendLocale('CONFIG_REMOVE_UNSUCCESS', ['prefix', value, 1]);
-        if (!prefixes.includes(value.join(' '))) return message.sendLocale('CONFIG_DOESNT_EXIST', ['prefix', value]);
-        await message.guild.settings.update('prefix', value.join(' '), { action: 'remove' });
-        message.sendLocale('CONFIG_REMOVE_SUCCESS', ['prefix', value]);
+        if (prefixes.length == 1) return message.sendLocale('COMMAND_PREFIX_MIN', [value]);
+        if (!prefixes.includes(value)) return message.sendLocale('COMMAND_PREFIX_DOESNT_EXIST', [value]);
+        await message.guild.settings.update('prefix', value, { action: 'remove' });
+        message.sendLocale('COMMAND_PREFIX_REMOVE_SUCCESS', [value]);
     }
 
     async reset(message) {
         await message.guild.settings.reset('prefix');
-        message.sendLocale('CONFIG_RESET_SUCCESS', ['prefix']);
+        message.sendLocale('COMMAND_PREFIX_RESET');
     }
 
 };
