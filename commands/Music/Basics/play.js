@@ -37,8 +37,8 @@ module.exports = class extends Command {
         if (!perms.has('CONNECT')) return message.sendLocale('COMMAND_PLAY_NOPERM', ['connect']);
         if (!perms.has('SPEAK')) return message.sendLocale('COMMAND_PLAY_NOPERM', ['speak']);
 
-        if (message.author.settings.playlists[searchString]) {
-            const playlist = message.author.settings.playlists[searchString];
+        if (message.author.settings.playlists[searchString.toLowerCase()]) {
+            const playlist = message.author.settings.playlists[searchString.toLowerCase()];
 
             for (const video of Object.values(playlist)) {
                 const vid = await this.yt.getVideo(video.url).catch(error => { return; });
@@ -46,7 +46,7 @@ module.exports = class extends Command {
                 await this.handleVideo(vid, message, voice, true);
             }
 
-            return await message.sendLocale('MUSIC_QUEUEADD_PLAYLIST', [searchString, message.author.tag]);
+            return await message.sendLocale('MUSIC_QUEUEADD_PLAYLIST', [searchString.toLowerCase(), message.author.tag]);
         } else if (url.match(/^https?:\/\/(www.youtube.com|youtube.com)\/playlist(.*)$/)) {
             const playlist = await this.yt.getPlaylist(url);
             const videos = await playlist.getVideos();
@@ -125,8 +125,8 @@ module.exports = class extends Command {
 
         const dispatcher = sQueue.connection.play(ytdl(song.url))
             .on('end', () => {
-                sQueue.songs.length > 0 && sQueue.songs[sQueue.songID].repeat == true ? sQueue.songID = sQueue.songID : sQueue.songID = sQueue.songID + 1;
-                return this.play(message, sQueue.songs[sQueue.songID]);
+                sQueue.songs.length > 0 && sQueue.songs[sQueue.songID < 0 ? 0 : sQueue.songID].repeat == true ? sQueue.songID = sQueue.songID : sQueue.songID = sQueue.songID + 1;
+                return this.play(message, sQueue.songs[sQueue.songID < 0 ? 0 : sQueue.songID]);
             }).on('error', err => {
                 sQueue.text.send(message.language.get('MUSIC_PLAY_ERROR', [err]));
                 this.client.console.error(err);
