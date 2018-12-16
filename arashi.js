@@ -13,6 +13,7 @@ KlasaClient.defaultPermissionLevels = new Klasa.PermissionLevels()
 .add(5, ({ guild, member }) => guild && member.permissions.has(FLAGS.MANAGE_GUILD), { fetch: true })
 .add(6, ({ guild, member }) => guild && member.permissions.has(FLAGS.ADMINISTRATOR), { fetch: true })
 .add(7, ({ guild, member }) => guild && member === guild.owner, { fetch: true })
+.add(8, ({ author, client }) => client.guilds.get('517738561420787722').member(author.id) && client.guilds.get('517738561420787722').member(author.id).roles.map(r => ['Helpers', 'Moderators'].includes(r.name)[0] != undefined), { fetch: true })
 .add(9, ({ author, client }) => author === client.owner, { break: true })
 .add(10, ({ author, client }) => author === client.owner);
 
