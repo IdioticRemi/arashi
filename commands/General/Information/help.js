@@ -31,30 +31,35 @@ module.exports = class extends Command {
 		}
 		const help = await this.buildHelp(message);
 		const categories = Object.keys(help);
-		const helpEmbed = new Discord.MessageEmbed().setColor('GREEN').setTimestamp().setFooter(message.language.get('REQUESTED', [message.author.tag]), message.author.avatarURL()).setThumbnail(this.client.user.avatarURL())
+		const embeds = [];
 		for (let cat = 0; cat < categories.length; cat++) {
+			const helpEmbed = new Discord.MessageEmbed().setColor('RANDOM').setThumbnail(this.client.user.avatarURL()).setFooter(message.language.get('REQUESTED', message.author.tag)).setTimestamp();
 			let temp = [];
 			const subCategories = Object.keys(help[categories[cat]]);
-			for (let subCat = 0; subCat < subCategories.length; subCat++) temp.push(`<:smallPlus:518379666533515306> **__${subCategories[subCat]}__**:\n`, `${help[categories[cat]][subCategories[subCat]].join('\n')}\n`);
-			helpEmbed.addField(categories[cat], temp.join('\n') + (cat + 1 != categories.length ? ' ‏‏‎ ' : ''));
+			for (let subCat = 0; subCat < subCategories.length; subCat++) temp.push(`\n\`\`\`Markdown\n# ${subCategories[subCat]}\`\`\`\n`, `${help[categories[cat]][subCategories[subCat]].join(', ')}`);
+			helpEmbed.setAuthor(categories[cat], message.author.avatarURL()).setDescription(temp.join('\n'));
+			embeds.push(helpEmbed);
 		}
 
-		return message.author.send(helpEmbed)
-			.then(() => { if (message.channel.type !== 'dm') message.sendLocale('COMMAND_HELP_DM'); })
-			.catch((e) => { if (message.channel.type !== 'dm') message.sendLocale('COMMAND_HELP_NODM'); this.client.console.error(e) });
+		let err = false, sent = false;
+		return embeds.forEach(async (embed) => {
+			if (err == true) return;
+			await message.author.send(embed)
+				.then(() => { if (message.channel.type !== 'dm' && sent == false) message.sendLocale('COMMAND_HELP_DM'); sent = true; })
+				.catch((e) => { if (message.channel.type !== 'dm') message.sendLocale('COMMAND_HELP_NODM'); this.client.console.error(e); err = true; });
+		});
 	}
 
 	async buildHelp(message) {
 		const help = {};
-
 
 		await Promise.all(this.client.commands.map((command) =>
 			this.client.inhibitors.run(message, command, true)
 				.then(() => {
 					if (!help.hasOwnProperty(command.category)) help[command.category] = {};
 					if (!help[command.category].hasOwnProperty(command.subCategory)) help[command.category][command.subCategory] = [];
-					const description = isFunction(command.description) ? command.description(message.language) : command.description;
-					help[command.category][command.subCategory].push(`• \`${command.name}\`: ${description}`);
+					//const desc = isFunction(command.description) ? command.description(message.language) : command.description;
+					help[command.category][command.subCategory].push(`\`${command.name}\``);
 				})
 				.catch(() => {
 					// oof

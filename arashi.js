@@ -18,8 +18,11 @@ KlasaClient.defaultPermissionLevels = new Klasa.PermissionLevels()
 .add(10, ({ author, client }) => author === client.owner);
 
 KlasaClient.defaultUserSchema
-    .add('playlists', 'any')
-    .add('vip', 'boolean');
+    .add('playlists', 'any', { default: {} })
+    .add('vip', 'boolean', { default: false });
+
+KlasaClient.defaultGuildSchema
+    .add('channels', 'any', { default: { mod: undefined, logs: undefined, welcome: undefined } });
 
 let Arashi = new KlasaClient({
     providers: { default: 'firestore', firestore: { credentials: cfg.firebase, databaseURL: cfg.firebase.databaseURL} },

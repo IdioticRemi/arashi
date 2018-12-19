@@ -10,11 +10,12 @@ module.exports = class extends Command {
             aliases: ['an', 'broadcast', 'bc'],
 			description: language => language.get('COMMAND_ANNOUNCE_DESCRIPTION'),
             usage: '<channel:chan> <message:String> [...]',
-            usageDelim: ' '
+            usageDelim: ' ',
+            requiredPermissions: ["MENTION_EVERYONE"]
         });
         
         this.createCustomResolver('chan', (arg, possible, message, [action]) => {
-            if (message.mentions.channels.first() && arg || this.client.channels.get(arg) && arg) return message.mentions.channels.first() || this.client.channels.get(channel);
+            if (message.mentions.channels.first() && arg || arg && message.guild.channels.get(arg)) return message.mentions.channels.first() || message.guild.channels.get(channel);
             throw message.language.get('COMMAND_ANNOUNCE_NOCHANNEL');
         });
     }
