@@ -1,52 +1,102 @@
 const { Command, Stopwatch, Type, util } = require('klasa');
 const { inspect } = require('util');
+const fetch = require('node-fetch');
 
 module.exports = class extends Command {
 
 	constructor(...args) {
 		super(...args, {
 			aliases: ['ev'],
-			permissionLevel: 10,
+			description: (language) => language.get('COMMAND_EVAL_DESCRIPTION'),
+			extendedHelp: (language) => language.get('COMMAND_EVAL_EXTENDED'),
 			guarded: true,
-			description: language => language.get('COMMAND_EVAL_DESCRIPTION'),
-			extendedHelp: language => language.get('COMMAND_EVAL_EXTENDEDHELP'),
+			permissionLevel: 10,
 			usage: '<expression:str>'
 		});
+
+		this.timeout = 30000;
 	}
 
 	async run(message, [code]) {
-		const { success, result, time, type } = await this.eval(message, code);
-		const footer = util.codeBlock('ts', type);
-		const output = message.language.get(success ? 'COMMAND_EVAL_OUTPUT' : 'COMMAND_EVAL_ERROR',
-			time, util.codeBlock('js', result), footer);
+		const flagTime = 'no-timeout' in message.flags ? 'wait' in message.flags ? Number(message.flags.wait) : this.timeout : Infinity;
+		const language = message.flags.lang || message.flags.language || (message.flags.json ? 'json' : 'js');
+		const { success, result, time, type } = await this.timedEval(message, code, flagTime);
 
-		if ('silent' in message.flags) return null;
-
-		// Handle too-long-messages
-		if (output.length > 2000) {
-			if (message.guild && message.channel.attachable) {
-				return message.channel.sendFile(Buffer.from(result), 'output.txt', message.language.get('COMMAND_EVAL_SENDFILE', time, footer));
-			}
-			this.client.emit('log', result);
-			return message.sendLocale('COMMAND_EVAL_SENDCONSOLE', [time, footer]);
+		if (message.flags.silent) {
+			if (!success && result && result.stack) this.client.emit('error', result.stack);
+			return null;
 		}
 
-		// If it's a message that can be sent correctly, send it
-		return message.sendMessage(output);
+		const footer = util.codeBlock('ts', type);
+		const sendAs = message.flags.output || message.flags['output-to'] || (message.flags.log ? 'log' : null);
+		return this.handleMessage(message, { sendAs, hastebinUnavailable: false, url: null }, { success, result, time, footer, language });
+	}
+
+	async handleMessage(message, options, { success, result, time, footer, language }) {
+		switch (options.sendAs) {
+			case 'file': {
+				if (message.channel.attachable) return message.channel.sendFile(Buffer.from(result), 'output.txt', message.language.get('COMMAND_EVAL_OUTPUT_FILE', time, footer));
+				await this.getTypeOutput(message, options);
+				return this.handleMessage(message, options, { success, result, time, footer, language });
+			}
+			case 'haste':
+			case 'hastebin': {
+				if (!options.url) options.url = await this.getHaste(result, language).catch(() => null);
+				if (options.url) return message.sendMessage(message.language.get('COMMAND_EVAL_OUTPUT_HASTEBIN', time, options.url, footer));
+				options.hastebinUnavailable = true;
+				await this.getTypeOutput(message, options);
+				return this.handleMessage(message, options, { success, result, time, footer, language });
+			}
+			case 'console':
+			case 'log': {
+				this.client.emit('log', result);
+				return message.sendMessage(message.language.get('COMMAND_EVAL_OUTPUT_CONSOLE', time, footer));
+			}
+			case 'none':
+				return null;
+			default: {
+				if (result.length > 2000) {
+					await this.getTypeOutput(message, options);
+					return this.handleMessage(message, options, { success, result, time, footer, language });
+				}
+				return message.sendMessage(message.language.get(success ? 'COMMAND_EVAL_OUTPUT' : 'COMMAND_EVAL_ERROR',
+					time, util.codeBlock(language, result), footer));
+			}
+		}
+	}
+
+	async getTypeOutput(message, options) {
+		const _options = ['log'];
+		if (message.channel.attachable) _options.push('file');
+		if (!options.hastebinUnavailable) _options.push('hastebin');
+		let _choice;
+		do {
+			_choice = await message.prompt(`Choose one of the following options: ${_options.join(', ')}`).catch(() => ({ content: 'none' }));
+		} while (!['file', 'haste', 'hastebin', 'console', 'log', 'default', 'none', null].includes(_choice.content));
+		options.sendAs = _choice.content;
+	}
+
+	timedEval(message, code, flagTime) {
+		if (flagTime === Infinity || flagTime === 0) return this.eval(message, code);
+		return Promise.race([
+			util.sleep(flagTime).then(() => ({
+				success: false,
+				result: message.language.get('COMMAND_EVAL_TIMEOUT', flagTime / 1000),
+				time: '⏱ ...',
+				type: 'EvalTimeoutError'
+			})),
+			this.eval(message, code)
+		]);
 	}
 
 	// Eval the input
 	async eval(message, code) {
-		// eslint-disable-next-line no-unused-vars
-		const msg = message;
-		const { flags } = message;
-		code = code.replace(/[“”]/g, '"').replace(/[‘’]/g, "'");
 		const stopwatch = new Stopwatch();
 		let success, syncTime, asyncTime, result;
 		let thenable = false;
 		let type;
 		try {
-			if (flags.async) code = `(async () => {\n${code}\n})();`;
+			if (message.flags.async) code = `(async () => {\n${code}\n})();`;
 			result = eval(code);
 			syncTime = stopwatch.toString();
 			type = new Type(result);
@@ -59,18 +109,17 @@ module.exports = class extends Command {
 			success = true;
 		} catch (error) {
 			if (!syncTime) syncTime = stopwatch.toString();
-			if (!type) type = new Type(error);
 			if (thenable && !asyncTime) asyncTime = stopwatch.toString();
-			if (error && error.stack) this.client.emit('error', error.stack);
+			if (!type) type = new Type(error);
 			result = error;
 			success = false;
 		}
 
 		stopwatch.stop();
 		if (typeof result !== 'string') {
-			result = inspect(result, {
-				depth: flags.depth ? parseInt(flags.depth) || 0 : 0,
-				showHidden: Boolean(flags.showHidden)
+			result = result instanceof Error ? result.stack : message.flags.json ? JSON.stringify(result, null, 4) : inspect(result, {
+				depth: message.flags.depth ? parseInt(message.flags.depth) || 0 : 0,
+				showHidden: Boolean(message.flags.showHidden)
 			});
 		}
 		return { success, type, time: this.formatTime(syncTime, asyncTime), result: util.clean(result) };
@@ -78,6 +127,13 @@ module.exports = class extends Command {
 
 	formatTime(syncTime, asyncTime) {
 		return asyncTime ? `⏱ ${asyncTime}<${syncTime}>` : `⏱ ${syncTime}`;
+	}
+
+	async getHaste(evalResult, language) {
+		const key = await fetch('https://hastebin.com/documents', { method: 'POST', body: evalResult })
+			.then(response => response.json())
+			.then(body => body.key);
+		return `https://hastebin.com/${key}.${language}`;
 	}
 
 };

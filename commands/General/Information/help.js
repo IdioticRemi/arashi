@@ -41,7 +41,7 @@ module.exports = class extends Command {
 
 		return message.author.send(helpEmbed)
 			.then(() => { if (message.channel.type !== 'dm') message.sendLocale('COMMAND_HELP_DM'); })
-			.catch(() => { if (message.channel.type !== 'dm') message.sendLocale('COMMAND_HELP_NODM'); });
+			.catch((e) => { if (message.channel.type !== 'dm') message.sendLocale('COMMAND_HELP_NODM'); this.client.console.error(e) });
 	}
 
 	async buildHelp(message) {

@@ -10,36 +10,37 @@ module.exports = class extends Command {
             cooldown: 3,
             description: language => language.get('COMMAND_LANGUAGE_DESCRIPTION'),
             subcommands: true,
-            usage: '<set|reset|show:default> (value:value)',
+            usage: '<set|reset|show:default> (value:value) [...]',
             usageDelim: ' '
         });
 
         this.createCustomResolver('value', (arg, possible, message, [action]) => {
             if (!['set'].includes(action) || arg) return arg;
-            throw message.language.get('CONFIG_NOVALUE');
+            throw message.language.get('COMMAND_LANGUAGE_VALUE');
         });
 
     }
 
     async show(message) {
-        const value = await message.guild.settings.get('language');
-        message.sendLocale('CONFIG_SHOW', ['language', value]);
+        const lang = await message.guild.settings.get('language');
+        message.sendLocale('COMMAND_LANGUAGE_SHOW', [lang]);
     }
 
-    async set(message, [...value]) {
-        if (!this.isLanguage(value)) return message.sendLocale('CONFIG_NOT_TYPE', ['language']);
+    async set(message, [lang]) {
+        lang = lang.toLowerCase();
+        if (!this.isLanguage(lang)) return message.sendLocale('COMMAND_LANGUAGE_SET_UNSUCCESS', [lang]);
 
-        await message.guild.settings.update('language', value.join(' '));
-        message.sendLocale('CONFIG_SET_SUCCESS', ['language', value]);
+        await message.guild.settings.update('language', lang);
+        message.sendLocale('COMMAND_LANGUAGE_SET_SUCCESS', [lang]);
     }
 
     async reset(message) {
         await message.guild.settings.reset('language');
-        message.sendLocale('CONFIG_RESET_SUCCESS', ['language']);
+        message.sendLocale('COMMAND_LANGUAGE_RESET');
     }
 
     isLanguage(str) {
-        const language = this.client.languages.get(str.join(' '));
+        const language = this.client.languages.get(str);
         if (language) return language;
         return undefined;
     }
