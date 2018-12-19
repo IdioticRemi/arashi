@@ -13,7 +13,8 @@ module.exports = class extends Command {
             cooldown: 3,
             aliases: ['pl', 'music'],
 			description: language => language.get('COMMAND_PLAY_DESCRIPTION'),
-            usage: '<text:String> [...]'
+            usage: '<text:String> [...]',
+            requiredPermissions: ["CONNECT", "SPEAK"]
         });
         this.yt = null;
     }

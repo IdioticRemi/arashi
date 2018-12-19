@@ -44,6 +44,7 @@ module.exports = class extends Command {
 	async everything(message) {
 		const timer = new Stopwatch();
 		await Promise.all(this.client.pieceStores.map(async (store) => {
+			if (store.name == 'providers') return;
 			await store.loadAll();
 			await store.init();
 		}));

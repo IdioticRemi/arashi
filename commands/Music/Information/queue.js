@@ -13,6 +13,7 @@ module.exports = class extends Command {
             cooldown: 3,
             permissionLevel: 10,
             aliases: ['q', 'songlist', 'list', 'qu'],
+            requiredPermissions: ['ATTACH_FILES'],
 			description: language => language.get('COMMAND_QUEUE_DESCRIPTION'),
             usage: ''
 		});

@@ -250,6 +250,13 @@ module.exports = class extends Language {
 			COMMAND_COMMAND_ENABLED: (cmd) => `${dataPlus} Command \`${cmd}\` has been **enabled** in this guild.`,
 			COMMAND_COMMAND_RESET: `${dataYe} Successfuly **reset** this guild's **disabled commands**.`,
 
+			COMMAND_WELCOME_DESCRIPTION: `Set, Reset or Get the bot's welcome channel in this guild.`,
+			COMMAND_WELCOME_SHOW: (channel) => `${dataGet} This guild's **welcome channel** is ${channel || 'none'}.`,
+			COMMAND_WELCOME_CHANNEL: `${no} You must provide a **channel id/mention** to change this guild's welcome channel.`,
+			COMMAND_WELCOME_SET_UNSUCCESS: (channel) => `${dataNo} Channel \`${channel}\` does not exist in this guild.`,
+			COMMAND_WELCOME_SET_SUCCESS: (channel) => `${dataYe} Guild's welcome channel has been set to ${channel}.`,
+			COMMAND_WELCOME_RESET: `${dataYe} Successfuly **reset** this guild's **welcome channel**.`,
+
 			REQUESTED: (tag) => `Requested by ${tag}`,
 
 			COMMAND_ANIMAL_TITLE: (animal) => `Here's a beautiful ${animal} picture!`,
@@ -346,8 +353,11 @@ module.exports = class extends Language {
 			COMMAND_AMIVIP_NOTONSERVER: `\\🍣 You're not a real member of our community! (join here: https://discord.gg/kaZ2jf8)`,
 			COMMAND_AMIVIP_NOTVIP: `\\🍣 **YOU SHALL NOT PASS!** (You don't have the VIP role on the official guild)`,
 			COMMAND_AMIVIP_TITLE: `🍣 A NEW MEMBER BECAME A VIP USER! YAY!!`,
-			COMMAND_AMIVIP_YOUARE: (tag) => `🍣 Welcome to **${tag}** in the VIP users community! *yay* 🍣`
+			COMMAND_AMIVIP_YOUARE: (tag) => `🍣 Welcome to **${tag}** in the VIP users community! *yay* 🍣`,
 
+			COMMAND_ARCADIA_FILTER_DESCRIPTION: (type) => `Arcadia: ${type} filter.`,
+			COMMAND_ARCADIA_GEN_DESCRIPTION: (type) => `Arcadia: ${type} gen.`,
+			COMMAND_ARCADIA_TEXT_DESCRIPTION: (type) => `Arcadia: ${type} text.`,
 		};
 	}
 

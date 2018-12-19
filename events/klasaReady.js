@@ -1,20 +1,15 @@
 const { Event } = require('klasa');
+const { version } = require('../package.json');
 var games = null, i = null;
 
 module.exports = class extends Event {
 
-	constructor(...args) {
-		super(...args, {
-			event: 'klasaReady'
-		});
-	}
-
 	async run() {
-        this.client.user.setActivity(games[i].n, { type: games[i].t });
+        this.client.user.setActivity(games[i].n + ' | v' + version, { type: games[i].t });
         i == games.length - 1 ? i = 0 : i++;
         
         setInterval(() => {
-            this.client.user.setActivity(games[i].n, { type: games[i].t });
+            this.client.user.setActivity(games[i].n + ' | v' + version, { type: games[i].t });
             i == games.length - 1 ? i = 0 : i++;
         }, 60000);
     }

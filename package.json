@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/Kizuru/Arashi#readme",
   "dependencies": {
+    "arcadia-module": "^0.1.1",
     "bufferutil": "^4.0.0",
     "canvas": "github:Automattic/node-canvas#92b192447e9b9ae98da0f801e4e34afdd1dc1ef8",
     "canvas-constructor": "^2.0.1",
