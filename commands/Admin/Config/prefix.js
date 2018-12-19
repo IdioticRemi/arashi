@@ -27,7 +27,7 @@ module.exports = class extends Command {
 
     async add(message, [value]) {
         const prefixes = await message.guild.settings.get('prefix');
-        if (message.author.settings.vip == false && prefixes.length >= 2) return message.sendLocale('COMMAND_PREFIX_USERMAX', [value]);
+        if (message.author.settings.vip === false && prefixes.length >= 2) return message.sendLocale('COMMAND_PREFIX_USERMAX', [value]);
         else if (prefixes.length >= 10) return message.sendLocale('COMMAND_PREFIX_VIPMAX', [value]);
         if (prefixes.includes(value)) return message.sendLocale('COMMAND_PREFIX_DOESNT_EXIST', [value]);
         await message.guild.settings.update('prefix', value, { action: 'add' });
@@ -36,7 +36,7 @@ module.exports = class extends Command {
 
     async remove(message, [value]) {
         const prefixes = await message.guild.settings.get('prefix');
-        if (prefixes.length == 1) return message.sendLocale('COMMAND_PREFIX_MIN', [value]);
+        if (prefixes.length === 1) return message.sendLocale('COMMAND_PREFIX_MIN', [value]);
         if (!prefixes.includes(value)) return message.sendLocale('COMMAND_PREFIX_DOESNT_EXIST', [value]);
         await message.guild.settings.update('prefix', value, { action: 'remove' });
         message.sendLocale('COMMAND_PREFIX_REMOVE_SUCCESS', [value]);

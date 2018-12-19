@@ -19,7 +19,7 @@ module.exports = class extends Command {
 
         if (!sQueue.voice.members.get(message.author.id)) return message.sendLocale('COMMAND_PAUSE_NOVOICE', [sQueue.voice.name]);
 
-        if (sQueue.playing == false) return message.sendLocale('COMMAND_PAUSE_PAUSED');
+        if (sQueue.playing === false) return message.sendLocale('COMMAND_PAUSE_PAUSED');
 
         sQueue.playing = false;
         await sQueue.connection.dispatcher.pause();

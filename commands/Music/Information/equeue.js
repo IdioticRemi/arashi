@@ -35,7 +35,7 @@ module.exports = class extends Command {
             queueDisplay.push(message.language.get('COMMAND_QUEUE_MORESONGS', [sQueue.songs.length - sQueue.songID - 6]));
         }
 
-        if (queueDisplay.length == 3) queueDisplay.push(message.language.get('COMMAND_QUEUE_EMPTY'));
+        if (queueDisplay.length === 3) queueDisplay.push(message.language.get('COMMAND_QUEUE_EMPTY'));
 
         const queue = new MessageEmbed()
             .setAuthor(message.language.get('COMMAND_EQUEUE_TITLE', [message.guild.name]), message.guild.iconURL())

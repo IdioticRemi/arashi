@@ -29,8 +29,8 @@ module.exports = class extends Command {
 
         let s = await message.author.settings.get('playlists') || {};
 
-        if (message.author.settings.vip == false && Object.keys(s).length >= 2) return message.sendLocale('COMMAND_PLAYLIST_CREATE_USERLIMIT', [name.join(' ').toLowerCase()]);
-        else if (message.author.settings.vip == true && Object.keys(s).length >= 20) return message.sendLocale('COMMAND_PLAYLIST_CREATE_VIPLIMIT', [name.join(' ').toLowerCase()]);
+        if (message.author.settings.vip === false && Object.keys(s).length >= 2) return message.sendLocale('COMMAND_PLAYLIST_CREATE_USERLIMIT', [name.join(' ').toLowerCase()]);
+        else if (message.author.settings.vip === true && Object.keys(s).length >= 20) return message.sendLocale('COMMAND_PLAYLIST_CREATE_VIPLIMIT', [name.join(' ').toLowerCase()]);
 
         s[name.join(' ').toLowerCase()] = new Array();
 
@@ -68,8 +68,8 @@ module.exports = class extends Command {
         const songArray = new Array();
 
         pl.forEach(song => {
-            if (songArray.length == 10) return songArray.push(message.language.get('COMMAND_PLAYLIST_MORESONGS', pl.length - 10));
-            if (songArray.length == 10 || songArray.length == 11) return;
+            if (songArray.length === 10) return songArray.push(message.language.get('COMMAND_PLAYLIST_MORESONGS', pl.length - 10));
+            if (songArray.length === 10 || songArray.length === 11) return;
             songArray.push('<:smallPlus:518379666533515306> [`' + song.title.replace(/\`/g, '\\`') + `\`](${song.url})`);
         })
 
@@ -81,7 +81,7 @@ module.exports = class extends Command {
     async list(message) {
         const s = await message.author.settings.get('playlists') || {};
 
-        if (Object.keys(s).length == 0) return message.sendLocale('COMMAND_PLAYLIST_NOTANY');
+        if (Object.keys(s).length === 0) return message.sendLocale('COMMAND_PLAYLIST_NOTANY');
 
         const listsEmbed = new MessageEmbed()
             .setColor('GREEN')
