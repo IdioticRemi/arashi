@@ -1,4 +1,6 @@
 ## Ignore Node.js Stuff we don't need.
+## This .gitignore file has been taken from the following source.
+## https://github.com/github/gitignore/blob/master/Node.gitignore
 # Logs
 logs
 *.log
