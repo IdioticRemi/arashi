@@ -16,8 +16,8 @@ module.exports = class extends Command {
     async get(message) {
         const sQueue = this.client.queues.get(message.guild.id);
         if (!sQueue) return message.sendLocale('MUSIC_NOT_PLAYING');
-        if (sQueue.songs[sQueue.songID].repeat == true) return message.sendLocale('COMMAND_REPEAT_SONG');
-        else if (sQueue.repeat == true) return message.sendLocale('COMMAND_REPEAT_QUEUE');
+        if (sQueue.songs[sQueue.songID].repeat === true) return message.sendLocale('COMMAND_REPEAT_SONG');
+        else if (sQueue.repeat === true) return message.sendLocale('COMMAND_REPEAT_QUEUE');
         else return message.sendLocale('COMMAND_REPEAT_DISABLED');
     }
 

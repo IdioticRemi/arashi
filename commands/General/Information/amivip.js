@@ -28,7 +28,7 @@ module.exports = class extends Command {
     }
 
     run(message) {
-        if (message.author.settings.vip == true) return message.sendLocale('COMMAND_AMIVIP_ALREADY');
+        if (message.author.settings.vip === true) return message.sendLocale('COMMAND_AMIVIP_ALREADY');
 
         const member = this.client.guilds.get('517738561420787722').member(message.author.id);
         

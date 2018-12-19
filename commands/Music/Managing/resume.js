@@ -19,7 +19,7 @@ module.exports = class extends Command {
 
         if (!sQueue.voice.members.get(message.author.id)) return message.sendLocale('COMMAND_RESUME_NOVOICE', [sQueue.voice.name]);
 
-        if (sQueue.playing == true) return message.sendLocale('COMMAND_RESUME_PLAYING');
+        if (sQueue.playing === true) return message.sendLocale('COMMAND_RESUME_PLAYING');
 
         sQueue.playing = true;
         await sQueue.connection.dispatcher.resume();

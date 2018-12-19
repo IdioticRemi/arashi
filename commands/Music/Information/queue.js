@@ -42,7 +42,7 @@ module.exports = class extends Command {
             queueSongs.push({ title: message.language.get('COMMAND_QUEUE_MORESONGS', [sQueue.songs.length - i]).toUpperCase() });
         }
 
-        if (queueSongs.length == 2) queueSongs.push({ title: message.language.get('COMMAND_QUEUE_EMPTY').toUpperCase() });
+        if (queueSongs.length === 2) queueSongs.push({ title: message.language.get('COMMAND_QUEUE_EMPTY').toUpperCase() });
 
         const queue = await this.BuildQueue(queueSongs, message.language, message.guild, sQueue);
 

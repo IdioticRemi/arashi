@@ -53,7 +53,7 @@ module.exports = class extends Command {
             const videos = await playlist.getVideos();
 
             for (const video of Object.values(videos)) {
-                if (video.raw.status.privacyStatus == 'private') return;
+                if (video.raw.status.privacyStatus === 'private') return;
                 const vid = await this.yt.getVideoByID(video.id).catch(error => { return; });
                 await this.handleVideo(vid, message, voice, true);
             }
@@ -107,8 +107,8 @@ module.exports = class extends Command {
         const sQueue = this.client.queues.get(message.guild.id);
 
         if (!song) {
-            if (sQueue.repeat == true) {
-                if (sQueue.songs.length == 0) { 
+            if (sQueue.repeat === true) {
+                if (sQueue.songs.length === 0) { 
                     sQueue.text.send(message.language.get('MUSIC_PLAY_ENDED'));
                     sQueue.voice.leave();
                     return this.client.queues.delete(message.guild.id);
@@ -126,7 +126,7 @@ module.exports = class extends Command {
 
         const dispatcher = sQueue.connection.play(ytdl(song.url))
             .on('end', () => {
-                sQueue.songs.length > 0 && sQueue.songs[sQueue.songID < 0 ? 0 : sQueue.songID].repeat == true ? sQueue.songID = sQueue.songID : sQueue.songID = sQueue.songID + 1;
+                sQueue.songs.length > 0 && sQueue.songs[sQueue.songID < 0 ? 0 : sQueue.songID].repeat === true ? sQueue.songID = sQueue.songID : sQueue.songID = sQueue.songID + 1;
                 return this.play(message, sQueue.songs[sQueue.songID < 0 ? 0 : sQueue.songID]);
             }).on('error', err => {
                 sQueue.text.send(message.language.get('MUSIC_PLAY_ERROR', [err]));

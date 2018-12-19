@@ -36,16 +36,18 @@ module.exports = class extends Command {
 			const helpEmbed = new Discord.MessageEmbed().setColor('RANDOM').setThumbnail(this.client.user.avatarURL()).setFooter(message.language.get('REQUESTED', message.author.tag)).setTimestamp();
 			let temp = [];
 			const subCategories = Object.keys(help[categories[cat]]);
-			for (let subCat = 0; subCat < subCategories.length; subCat++) temp.push(`\n\`\`\`Markdown\n# ${subCategories[subCat]}\`\`\`\n`, `${help[categories[cat]][subCategories[subCat]].join(', ')}`);
+			for (let subCat = 0; subCat < subCategories.length; subCat++) {
+				temp.push(`\n\`\`\`Markdown\n# ${subCategories[subCat]}\`\`\`\n`, `${help[categories[cat]][subCategories[subCat]].join(', ')}`);
+			}
 			helpEmbed.setAuthor(categories[cat], message.author.avatarURL()).setDescription(temp.join('\n'));
 			embeds.push(helpEmbed);
 		}
 
 		let err = false, sent = false;
 		return embeds.forEach(async (embed) => {
-			if (err == true) return;
+			if (err === true) return;
 			await message.author.send(embed)
-				.then(() => { if (message.channel.type !== 'dm' && sent == false) message.sendLocale('COMMAND_HELP_DM'); sent = true; })
+				.then(() => { if (message.channel.type !== 'dm' && sent === false) message.sendLocale('COMMAND_HELP_DM'); sent = true; })
 				.catch((e) => { if (message.channel.type !== 'dm') message.sendLocale('COMMAND_HELP_NODM'); this.client.console.error(e); err = true; });
 		});
 	}
