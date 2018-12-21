@@ -41,7 +41,7 @@ module.exports = class extends Command {
 
 	async tryEach(store, path) {
 		for (const dir of store.coreDirectories) if (await pathExists(join(dir, ...path))) return store.load(dir, path);
-		return undefined;
+		return;
 	}
 
 };

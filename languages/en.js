@@ -35,19 +35,19 @@ module.exports = class extends Language {
 		super(...args);
 		this.language = {
 			DEFAULT: (key) => `**${key}** has not been localized for **english** yet.`,
-			DEFAULT_LANGUAGE: `Default Language`,
+			DEFAULT_LANGUAGE: "Default Language",
 			PREFIX_REMINDER: (prefix = `@${this.client.user.tag}`) => `The prefix${Array.isArray(prefix) ?
 				`es for this guild are: ${prefix.map(pre => `\`${pre}\``).join(", ")}` :
 				` in this guild is set to: \`${prefix}\``
 			}`,
 			
-			SETTING_GATEWAY_EXPECTS_GUILD: `The parameter <Guild> expects either a Guild or a Guild Object.`,
+			SETTING_GATEWAY_EXPECTS_GUILD: "The parameter <Guild> expects either a Guild or a Guild Object.",
 			SETTING_GATEWAY_VALUE_FOR_KEY_NOEXT: (data, key) => `The value ${data} for the key ${key} does not exist.`,
 			SETTING_GATEWAY_VALUE_FOR_KEY_ALREXT: (data, key) => `The value ${data} for the key ${key} already exists.`,
-			SETTING_GATEWAY_SPECIFY_VALUE: `You must specify the value to add or filter.`,
+			SETTING_GATEWAY_SPECIFY_VALUE: "You must specify the value to add or filter.",
 			SETTING_GATEWAY_KEY_NOT_ARRAY: (key) => `The key ${key} is not an Array.`,
 			SETTING_GATEWAY_KEY_NOEXT: (key) => `The key ${key} does not exist in the current data schema.`,
-			SETTING_GATEWAY_INVALID_TYPE: `The type parameter must be either add or remove.`,
+			SETTING_GATEWAY_INVALID_TYPE: "The type parameter must be either add or remove.",
 			SETTING_GATEWAY_INVALID_FILTERED_VALUE: (piece, value) => `${piece.key} doesn"t accept the value: ${value}`,
 			
 			RESOLVER_MULTI_TOO_FEW: (name, min = 1) => `Provided too few ${name}s. Atleast ${min} ${min === 1 ? "is" : "are"} required.`,
@@ -70,43 +70,43 @@ module.exports = class extends Language {
 			RESOLVER_INVALID_TIME: (name) => `${name} must be a valid duration or date string.`,
 			RESOLVER_INVALID_URL: (name) => `${name} must be a valid url.`,
 			RESOLVER_INVALID_USER: (name) => `${name} must be a mention or valid user id.`,
-			RESOLVER_STRING_SUFFIX: ` characters`,
+			RESOLVER_STRING_SUFFIX: " characters",
 			RESOLVER_MINMAX_EXACTLY: (name, min, suffix) => `${name} must be exactly ${min}${suffix}.`,
 			RESOLVER_MINMAX_BOTH: (name, min, max, suffix) => `${name} must be between ${min} and ${max}${suffix}.`,
 			RESOLVER_MINMAX_MIN: (name, min, suffix) => `${name} must be greater than ${min}${suffix}.`,
 			RESOLVER_MINMAX_MAX: (name, max, suffix) => `${name} must be less than ${max}${suffix}.`,
 			
-			REACTIONHANDLER_PROMPT: `Which page would you like to jump to?`,
+			REACTIONHANDLER_PROMPT: "Which page would you like to jump to?",
 			
-			COMMANDMESSAGE_MISSING: `Missing one or more required arguments after end of input.`,
+			COMMANDMESSAGE_MISSING: "Missing one or more required arguments after end of input.",
 			COMMANDMESSAGE_MISSING_REQUIRED: (name) => `**${name}** is a required argument.`,
 			COMMANDMESSAGE_MISSING_OPTIONALS: (possibles) => `Missing a required option: (${possibles})`,
 			COMMANDMESSAGE_NOMATCH: (possibles) => `Your option didn"t match any of the possibilities: (${possibles})`,
 			
-			MONITOR_COMMAND_HANDLER_REPROMPT: (tag, error, time, abortOptions) => `${tag} | **${error}** | You have **${time}** seconds to respond to this prompt with a valid argument. Type **${abortOptions.join(`**, **`)}** to abort this prompt.`,
+			MONITOR_COMMAND_HANDLER_REPROMPT: (tag, error, time, abortOptions) => `${tag} | **${error}** | You have **${time}** seconds to respond to this prompt with a valid argument. Type **${abortOptions.join("**, **")}** to abort this prompt.`,
 			MONITOR_COMMAND_HANDLER_REPEATING_REPROMPT: (tag, name, time) => `${tag} | **${name}** is a repeating argument | You have **${time}** seconds to respond to this prompt with additional valid arguments. Type **"CANCEL"** to cancel this prompt.`,
-			MONITOR_COMMAND_HANDLER_ABORTED: `Aborted`,
+			MONITOR_COMMAND_HANDLER_ABORTED: "Aborted",
 			MONITOR_COMMAND_HANDLER_POSSIBILITIES: ["abort", "stop"],
 			
-			INHIBITOR_COOLDOWN: (remaining) => `${no} You have just used this command. You can use this command again in **${remaining} second${remaining === 1 ? `` : `s`}**.`,
+			INHIBITOR_COOLDOWN: (remaining) => `${no} You have just used this command. You can use this command again in **${remaining} second${remaining === 1 ?"" : "s"}**.`,
 			INHIBITOR_DISABLED: `${no} This command is currently disabled.`,
 			INHIBITOR_DISABLED_GUILD: `${no} This command is currently disabled on this guild.`,
 			INHIBITOR_MISSING_BOT_PERMS: (missing) => `${no} Insufficient permissions, missing: **${missing}**.`,
 			INHIBITOR_NSFW: `${no} You may not use NSFW commands in this channel.`,
 			INHIBITOR_PERMISSIONS: `${no} You do not have permission to use this command.`,
-			INHIBITOR_REQUIRED_SETTINGS: (settings) => `The guild is missing the **${settings.join(", ")}** guild setting${settings.length !== 1 ? `s` : ``} and thus the command cannot run.`,
+			INHIBITOR_REQUIRED_SETTINGS: (settings) => `The guild is missing the **${settings.join(", ")}** guild setting${settings.length !== 1 ? `s` :""} and thus the command cannot run.`,
 			INHIBITOR_RUNIN: (types) => `${no} This command is only available in ${types} channels.`,
 			INHIBITOR_RUNIN_NONE: (name) => `${no} The ${name} command is not configured to run in any channel.`,
 			
-			COMMAND_BLACKLIST_DESCRIPTION: `Blacklists or un-blacklists users and guilds from the bot.`,
+			COMMAND_BLACKLIST_DESCRIPTION: "Blacklists or un-blacklists users and guilds from the bot.",
 			COMMAND_BLACKLIST_SUCCESS: (usersAdded, usersRemoved, guildsAdded, guildsRemoved) => [
-				usersAdded.length ? `**Users Added**\n${util.codeBlock("", usersAdded.join(", "))}` : ``,
-				usersRemoved.length ? `**Users Removed**\n${util.codeBlock("", usersRemoved.join(", "))}` : ``,
-				guildsAdded.length ? `**Guilds Added**\n${util.codeBlock("", guildsAdded.join(", "))}` : ``,
-				guildsRemoved.length ? `**Guilds Removed**\n${util.codeBlock("", guildsRemoved.join(", "))}` : ``
+				usersAdded.length ? `**Users Added**\n${util.codeBlock("", usersAdded.join(", "))}` :"",
+				usersRemoved.length ? `**Users Removed**\n${util.codeBlock("", usersRemoved.join(", "))}` :"",
+				guildsAdded.length ? `**Guilds Added**\n${util.codeBlock("", guildsAdded.join(", "))}` :"",
+				guildsRemoved.length ? `**Guilds Removed**\n${util.codeBlock("", guildsRemoved.join(", "))}` :""
 			].filter(val => val !== "").join("\n"),
 			
-			COMMAND_EVAL_DESCRIPTION: `Evaluates arbitrary Javascript. Reserved for bot owner.`,
+			COMMAND_EVAL_DESCRIPTION: "Evaluates arbitrary Javascript. Reserved for bot owner.",
 			COMMAND_EVAL_EXTENDEDHELP: [
 				"The eval command evaluates code as-in, any error thrown from it will be handled.",
 				"It also uses the flags feature. Write --silent, --depth=number or --async to customize the output.",
@@ -129,16 +129,16 @@ module.exports = class extends Language {
 			COMMAND_EVAL_OUTPUT_FILE: (time, type) => `${ye} Sent the result as a file.\n**Type**:${type}\n${time}`,
 			COMMAND_EVAL_OUTPUT_HASTEBIN: (time, url, type) => `${ye} Sent the result to hastebin: ${url}\n**Type**:${type}\n${time}\n`,
 			
-			COMMAND_UNLOAD_DESCRIPTION: `Unloads the klasa piece.`,
+			COMMAND_UNLOAD_DESCRIPTION: "Unloads the klasa piece.",
 			COMMAND_UNLOAD: (type, name) => `${ye} Unloaded ${type}: ${name}`,
 			COMMAND_UNLOAD_WARN: `${no} You probably don"t want to unload that, since you wouldn"t be able to run any command to enable it again`,
 			
-			COMMAND_TRANSFER_DESCRIPTION: `Transfers a core piece to its respective folder.`,
+			COMMAND_TRANSFER_DESCRIPTION: "Transfers a core piece to its respective folder.",
 			COMMAND_TRANSFER_ERROR: `${no} That file has been transfered already or never existed.`,
 			COMMAND_TRANSFER_SUCCESS: (type, name) => `${ye} Successfully transferred ${type}: ${name}.`,
 			COMMAND_TRANSFER_FAILED: (type, name) => `${ye} Transfer of ${type}: ${name} to Client has failed. Please check your Console.`,
 			
-			COMMAND_RELOAD_DESCRIPTION: `Reloads a klasa piece, or all pieces of a klasa store.`,
+			COMMAND_RELOAD_DESCRIPTION: "Reloads a klasa piece, or all pieces of a klasa store.",
 			COMMAND_RELOAD: (type, name, time) => `${ye} Reloaded ${type}: ${name}. (Took: ${time})`,
 			COMMAND_RELOAD_FAILED: (type, name) => `${no} Failed to reload ${type}: ${name}. Please check your Console.`,
 			COMMAND_RELOAD_ALL: (type, time) => `${ye} Reloaded all ${type}. (Took: ${time})`,
@@ -147,12 +147,12 @@ module.exports = class extends Language {
 			COMMAND_REBOOT_DESCRIPTION: "Reboots the bot.",
 			COMMAND_REBOOT: `${ye} Rebooting...`,
 			
-			COMMAND_LOAD_DESCRIPTION: `Load a piece from your bot.`,
+			COMMAND_LOAD_DESCRIPTION: "Load a piece from your bot.",
 			COMMAND_LOAD: (time, type, name) => `${ye} Successfully loaded ${type}: ${name}. (Took: ${time})`,
 			COMMAND_LOAD_FAIL: `${no} The file does not exist, or an error occurred while loading your file. Please check your console.`,
 			COMMAND_LOAD_ERROR: (type, name, error) => `${no} Failed to load ${type}: ${name}. Reason:${util.codeBlock(`js`, error)}`,
 			
-			COMMAND_PING_DESCRIPTION: `Runs a connection test to Discord.`,
+			COMMAND_PING_DESCRIPTION: "Runs a connection test to Discord.",
 			COMMAND_PING: `${minus} Ping?`,
 			COMMAND_PINGPONG: (diff, ping) => `${ye} Pong! (Roundtrip took: ${diff}ms. Heartbeat: ${ping}ms.)`,
 			
@@ -160,55 +160,55 @@ module.exports = class extends Language {
 				`To add ${this.client.user.username} to your discord guild:`,
 				`<${this.client.invite}>`,
 				util.codeBlock("", [
-					`The above link is generated requesting the minimum permissions required to use every command currently.`,
-					`I know not all permissions are right for every guild, so don"t be afraid to uncheck any of the boxes.`,
-					`If you try to use a command that requires more permissions than the bot is granted, it will let you know.`
-				].join(` `))
+					"The above link is generated requesting the minimum permissions required to use every command currently.",
+					"I know not all permissions are right for every guild, so don't be afraid to uncheck any of the boxes.",
+					"If you try to use a command that requires more permissions than the bot is granted, it will let you know."
+				].join(" "))
 			],
 
-			COMMAND_INVITE_DESCRIPTION: `Displays the join guild link of the bot.`,
+			COMMAND_INVITE_DESCRIPTION: "Displays the join guild link of the bot.",
 
 			COMMAND_INFO: [
 				"Klasa is a `plug-and-play` framework built on top of the Discord.js library.",
-				`Most of the code is modularized, which allows developers to edit Klasa to suit their needs.`,
-				``,
-				`Some features of Klasa include:`,
-				`• 🐇💨 Fast loading times with ES2017 support ("async"/"await")`,
-				`• 🎚🎛 Per-client/guild/user settings that can be extended with your own fields`,
-				`• 💬 Customizable command system with automated parameter resolving and the ability to load/reload commands on-the-fly`,
-				`• 👀 "Monitors", which can watch messages and edits (for swear filters, spam protection, etc.)`,
-				`• ⛔ "Inhibitors", which can prevent commands from running based on any condition you wish to apply (for permissions, blacklists, etc.)`,
-				`• 🗄 "Providers", which simplify usage of any database of your choosing`,
-				`• ${ye} "Finalizers", which run after successful commands (for logging, collecting stats, cleaning up responses, etc.)`,
-				`• ➕ "Extendables", which passively add methods, getters/setters, or static properties to existing Discord.js or Klasa classes`,
-				`• 🌐 "Languages", which allow you to localize your bot"s responses`,
-				`• ⏲ "Tasks", which can be scheduled to run in the future, optionally repeating`,
-				``,
-				`We hope to be a 100% customizable framework that can cater to all audiences. We do frequent updates and bugfixes when available.`,
-				"If you`re interested in us, check us out at https://klasa.js.org"
+				"Most of the code is modularized, which allows developers to edit Klasa to suit their needs.",
+				"",
+				"Some features of Klasa include:",
+				"• 🐇💨 Fast loading times with ES2017 support (\"async\"/\"await\")",
+				"• 🎚🎛 Per-client/guild/user settings that can be extended with your own fields",
+				"• 💬 Customizable command system with automated parameter resolving and the ability to load/reload commands on-the-fly",
+				"• 👀 \"Monitors\", which can watch messages and edits (for swear filters, spam protection, etc.)",
+				"• ⛔ \"Inhibitors\", which can prevent commands from running based on any condition you wish to apply (for permissions, blacklists, etc.)",
+				"• 🗄 \"Providers\", which simplify usage of any database of your choosing",
+				"• " + ye + " \"Finalizers\", which run after successful commands (for logging, collecting stats, cleaning up responses, etc.)",
+				"• ➕ \"Extendables\", which passively add methods, getters/setters, or static properties to existing Discord.js or Klasa classes",
+				"• 🌐 \"Languages\", which allow you to localize your bot's responses",
+				"• ⏲ \"Tasks\", which can be scheduled to run in the future, optionally repeating",
+				"",
+				"We hope to be a 100% customizable framework that can cater to all audiences. We do frequent updates and bugfixes when available.",
+				"If you're interested in us, check us out at https://klasa.js.org"
 			],
 			
-			COMMAND_CONF_USER_DESCRIPTION: `Change your private settings.`,
+			COMMAND_CONF_USER_DESCRIPTION: "Change your private settings.",
 			
-			COMMAND_INFO_DESCRIPTION: `Provides some information about this bot.`,
+			COMMAND_INFO_DESCRIPTION: "Provides some information about this bot.",
 			
-			COMMAND_HELP_DESCRIPTION: `Display help for a command.`,
-			COMMAND_HELP_NO_EXTENDED: `No extended help available.`,
+			COMMAND_HELP_DESCRIPTION: "Display help for a command.",
+			COMMAND_HELP_NO_EXTENDED: "No extended help available.",
 			COMMAND_HELP_DM: `${inbox} The list of commands you have access to has been sent to your DMs.`,
 			COMMAND_HELP_NODM: `${no} You have DMs disabled, I couldn"t send you the commands in DMs.`,
 			COMMAND_HELP_USAGE: (usage) => `Usage :: ${usage}`,
-			COMMAND_HELP_EXTENDED: `Extended Help ::`,
+			COMMAND_HELP_EXTENDED: "Extended Help ::",
 			
-			COMMAND_ENABLE_DESCRIPTION: `Re-enables or temporarily enables a command/inhibitor/monitor/finalizer. Default state restored on reboot.`,
+			COMMAND_ENABLE_DESCRIPTION: "Re-enables or temporarily enables a command/inhibitor/monitor/finalizer. Default state restored on reboot.",
 			COMMAND_ENABLE: (type, name) => `+ Successfully enabled ${type}: ${name}`,
 			
-			COMMAND_DISABLE_DESCRIPTION: `Re-disables or temporarily disables a command/inhibitor/monitor/finalizer/event. Default state restored on reboot.`,
+			COMMAND_DISABLE_DESCRIPTION: "Re-disables or temporarily disables a command/inhibitor/monitor/finalizer/event. Default state restored on reboot.",
 			COMMAND_DISABLE: (type, name) => `+ Successfully disabled ${type}: ${name}`,
 			COMMAND_DISABLE_WARN: `${no} You probably don"t want to disable that, since you wouldn"t be able to run any command to enable it again`,
 			
 			COMMAND_STATS: (memUsage, uptime, users, guilds, channels, klasaVersion, discordVersion, processVersion, message) => [
 				`**__${this.client.user.tag}"s statistics__**`,
-				``,
+				"",
 				`• Mem Usage: \`${memUsage} MB\``,
 				`• Uptime: \`${uptime}\``,
 				`• Users: \`${users}\``,
@@ -220,9 +220,9 @@ module.exports = class extends Language {
 				`• Shards: \`${(message.guild ? message.guild.shardID : 0) + 1} / ${this.client.options.totalShardCount}\``
 			].join(`\n`),
 
-			COMMAND_STATS_DESCRIPTION: `Provides some details about the bot and stats.`,
+			COMMAND_STATS_DESCRIPTION: "Provides some details about the bot and stats.",
 			
-			COMMAND_PREFIX_DESCRIPTION: `Add/Remove prefixes or Reset/Get the bot"s prefix(es) in this guild.`,
+			COMMAND_PREFIX_DESCRIPTION: "Add/Remove prefixes or Reset/Get the bot's prefix(es) in this guild.",
 			COMMAND_PREFIX_SHOW: (prefixes) => `${dataGet} This guild"s **prefix${prefixes.length > 1 ? "es** are" : "** is"}: \`${prefixes.join("`, `")}\`.`,
 			COMMAND_PREFIX_VALUE: `${no} You must provide a **prefix** to add/remove in this guild.`,
 			COMMAND_PREFIX_EXISTS: (prefix) => `${dataNo} Prefix \`${prefix}\` already exists in this guild.`,
@@ -233,14 +233,14 @@ module.exports = class extends Language {
 			COMMAND_PREFIX_REMOVE_SUCCESS: (prefix) => `${dataMinus} Prefix \`${prefix}\` has been removed from this guild"s prefixes.`,
 			COMMAND_PREFIX_RESET: `${dataYe} Successfuly **reset** this guild"s **prefixes**.`,
 
-			COMMAND_LANGUAGE_DESCRIPTION: `Set, Reset or Get the bot"s language in this guild.`,
+			COMMAND_LANGUAGE_DESCRIPTION: "Set, Reset or Get the bot's language in this guild.",
 			COMMAND_LANGUAGE_SHOW: (lang) => `${dataGet} This guild"s **language** is: \`${lang}\`.`,
 			COMMAND_LANGUAGE_VALUE: `${no} You must provide a **language name** to change this guild"s language.`,
 			COMMAND_LANGUAGE_SET_UNSUCCESS: (lang) => `${dataNo} Language \`${lang}\` does not exist in my database.`,
 			COMMAND_LANGUAGE_SET_SUCCESS: (lang) => `${dataYe} Guild"s langage has been set to \`${lang}\`.`,
 			COMMAND_LANGUAGE_RESET: `${dataYe} Successfuly **reset** this guild"s **language**.`,
 
-			COMMAND_COMMAND_DESCRIPTION: `Enable/Disable commands or Reset/Get diabled commands in this guild.`,
+			COMMAND_COMMAND_DESCRIPTION: "Enable/Disable commands or Reset/Get diabled commands in this guild.",
 			COMMAND_COMMAND_NOTANY: `${dataGet} You don"t have any **disabled commands**.`,
 			COMMAND_COMMAND_SHOW: (cmds) => `${dataGet} This guild"s **disabled command${cmds.length > 1 ? "s** are" : "** is"}: \`${cmds.join("`, `")}\`.`,
 			COMMAND_COMMAND_VALUE: `${no} You must provide a **command name** to enable/disable in this guild.`,
@@ -250,7 +250,7 @@ module.exports = class extends Language {
 			COMMAND_COMMAND_ENABLED: (cmd) => `${dataPlus} Command \`${cmd}\` has been **enabled** in this guild.`,
 			COMMAND_COMMAND_RESET: `${dataYe} Successfuly **reset** this guild"s **disabled commands**.`,
 
-			COMMAND_WELCOME_DESCRIPTION: `Set, Reset or Get the bot"s welcome channel in this guild.`,
+			COMMAND_WELCOME_DESCRIPTION: "Set, Reset or Get the bot's welcome channel in this guild.",
 			COMMAND_WELCOME_SHOW: (channel) => `${dataGet} This guild"s **welcome channel** is ${channel || "none"}.`,
 			COMMAND_WELCOME_CHANNEL: `${no} You must provide a **channel id/mention** to change this guild"s welcome channel.`,
 			COMMAND_WELCOME_SET_UNSUCCESS: (channel) => `${dataNo} Channel \`${channel}\` does not exist in this guild.`,
@@ -261,9 +261,9 @@ module.exports = class extends Language {
 
 			COMMAND_ANIMAL_TITLE: (animal) => `Here"s a beautiful ${animal} picture!`,
 			
-			COMMAND_CAT_DESCRIPTION: `Sends a random cat picture or gif.`,
+			COMMAND_CAT_DESCRIPTION: "Sends a random cat picture or gif.",
 
-			COMMAND_DOG_DESCRIPTION: `Sends a random dog picture or gif.`,
+			COMMAND_DOG_DESCRIPTION: "Sends a random dog picture or gif.",
 			
 			MUSIC_PLAY_ENDED: `${stop} There"s no more song in the queue. Stopped playing music.`,
 			MUSIC_PLAY_ERROR: (error) => `${no} I"m sorry, an error occured: \`\`\`js\n${error}\`\`\``,
@@ -271,44 +271,44 @@ module.exports = class extends Language {
 			MUSIC_QUEUEADD_PLAYLIST: (title, author) => `${add} Playlist **${title}** by **${author}** has been added to the queue.`,
 			MUSIC_NOT_PLAYING: `${no} Music is currently not running on this guild.`,
 
-			COMMAND_PLAY_DESCRIPTION: `Play music from Youtube (url (playlist or video) or a video"s title) in your voice channel.`,
+			COMMAND_PLAY_DESCRIPTION: "Play music from Youtube (url (playlist or video) or a video's title) in your voice channel.",
 			COMMAND_PLAY_NOVOICE: `${no} You need to be in a voice channel in order to play music!`,
 			COMMAND_PLAY_NOPERM: (perm) => `${no} I don"t have the permission to **${perm === "speak" ? "speak** in" : "connect** to"} this channel!`,
 			COMMAND_PLAY_ERRCON: `${no} I couldn"t join the voice channel you"re on.`,
 			COMMAND_PLAY_QUEUEADD: (title, author) => `${add} Added **${title}** by **${author}** to the queue.`,
 			PLAY_NO_RESULTS: (name) => `${no} I"m sorry, I found no results for "**${name}**".`,
 			
-			COMMAND_LEAVE_DESCRIPTION: `Leave the voice channel you"re in when playing music.`,
+			COMMAND_LEAVE_DESCRIPTION: "Leave the voice channel you're in when playing music.",
 			COMMAND_LEAVE_NOVOICE: (channel) => `${no} You need to be inside the **${channel}** channel in order to stop music!`,
 			COMMAND_LEAVE_SUCCESS: (channel) => `${stop} Successfuly left the **${channel}** channel.`,
 
-			COMMAND_SKIP_DESCRIPTION: `Skip the current song when playing music.`,
+			COMMAND_SKIP_DESCRIPTION: "Skip the current song when playing music.",
 			COMMAND_SKIP_NOVOICE: (channel) => `${no} You need to be inside the **${channel}** channel in order to skip the song!`,
 			COMMAND_SKIP_SUCCESS: (title, tag) => `${next} Skipped **${title}** | User: **${tag}**.`,
 
-			COMMAND_PREV_DESCRIPTION: `Play the previous song when playing music.`,
+			COMMAND_PREV_DESCRIPTION: "Play the previous song when playing music.",
 			COMMAND_PREV_NOVOICE: (channel) => `${no} You need to be inside the **${channel}** channel in order to play the previous song!`,
 			COMMAND_PREV_NOPE: `${prev} There is no previous song I could play.`,
 			COMMAND_PREV_SUCCESS: (title, tag) => `${prev} Playing previous song (**${title}**) | User: **${tag}**.`,
 
-			COMMAND_NOW_DESCRIPTION: `See what"s the current song"s name when playing music.`,
+			COMMAND_NOW_DESCRIPTION: "See what's the current song's name when playing music.",
 			COMMAND_NOW_SUCCESS: (title, tag) => `${play} Now Playing: **${title}**, requested by **${tag}**.`,
 
-			COMMAND_NOW_DESCRIPTION: `See or change the volume when playing music.`,
+			COMMAND_NOW_DESCRIPTION: "See or change the volume when playing music.",
 			COMMAND_VOLUME_VAL: (volume) => `${vol} Current volume is **${volume}%**`,
 			COMMAND_VOLUME_NOPE: `${no} Volume"s value must be included between **0%** and **200%**.`,
 			COMMAND_VOLUME_SUCCESS: (old, volume, tag) => `${old > volume ? volMin : old === volume ? vol :volPlus} Changed volume"s value from **${old}%** to **${volume}%** | User: **${tag}**.`,
 		
-			COMMAND_QUEUE_DESCRIPTION: `See what"s in the queue (image version) when playing music.`,
-			COMMAND_EQUEUE_DESCRIPTION: `See what"s in the queue (embed version) when playing music.`,
+			COMMAND_QUEUE_DESCRIPTION: "See what's in the queue (image version) when playing music.",
+			COMMAND_EQUEUE_DESCRIPTION: "See what's in the queue (embed version) when playing music.",
 			COMMAND_EQUEUE_TITLE: (guild) => `Music Queue: ${guild}`,
-			COMMAND_QUEUE_TITLE: `MUSIC QUEUE FOR`,
-			COMMAND_QUEUE_EMPTY: `Queue is empty...`,
-			COMMAND_QUEUE_NOPREV: `No previous song...`,
-			COMMAND_QUEUE_PREV: `PREVIOUS SONG`,
-			COMMAND_QUEUE_NOW: `NOW PLAYING`,
-			COMMAND_QUEUE_NEXT: `NEXT SONG(S)`,
-			COMMAND_QUEUE_PAUSED: ` (PAUSED)`,
+			COMMAND_QUEUE_TITLE: "MUSIC QUEUE FOR",
+			COMMAND_QUEUE_EMPTY: "Queue is empty...",
+			COMMAND_QUEUE_NOPREV: "No previous song...",
+			COMMAND_QUEUE_PREV: "PREVIOUS SONG",
+			COMMAND_QUEUE_NOW: "NOW PLAYING",
+			COMMAND_QUEUE_NEXT: "NEXT SONG(S)",
+			COMMAND_QUEUE_PAUSED: " (PAUSED)",
 			COMMAND_QUEUE_MORESONGS: (amount) => `\nAnd ${amount} more song(s)...`,
 
 			COMMAND_PAUSE_DESCRIPTION: `Pause the current song when playing music.`,

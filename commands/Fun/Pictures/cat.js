@@ -15,7 +15,7 @@ module.exports = class extends Command {
 	async run(message) {
 		const file = await fetch("http://aws.random.cat/meow")
 			.then((response) => response.json())
-			.then(body => body.file);
+			.then((body) => body.file);
 		const embed = new MessageEmbed()
 			.setColor("GREEN")
 			.setTimestamp()

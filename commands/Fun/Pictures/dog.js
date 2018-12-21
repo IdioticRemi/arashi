@@ -14,7 +14,7 @@ module.exports = class extends Command {
     async run(message) {
 		const file = await fetch("https://dog.ceo/api/breeds/image/random")
 			.then((response) => response.json())
-            .then(body => body.message);
+            .then((body) => body.message);
             
 		const embed = new MessageEmbed()
 			.setColor("GREEN")
