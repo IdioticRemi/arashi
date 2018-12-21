@@ -19,7 +19,7 @@ module.exports = class extends Command {
     }
 
     async run(message, [...text]) {
-        const buff = await Arcadia.texts(this.name.toLowerCase(), text !== undefined ? text : message.author.username);
+        const buff = await Arcadia.texts(this.name.toLowerCase(), text ? text : message.author.username);
         message.channel.send(new MessageAttachment(buff, `${this.name.toLowerCase()}-${message.author.id}.png`));
     }
 
