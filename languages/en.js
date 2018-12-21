@@ -94,7 +94,7 @@ module.exports = class extends Language {
 			INHIBITOR_MISSING_BOT_PERMS: (missing) => `${no} Insufficient permissions, missing: **${missing}**.`,
 			INHIBITOR_NSFW: `${no} You may not use NSFW commands in this channel.`,
 			INHIBITOR_PERMISSIONS: `${no} You do not have permission to use this command.`,
-			INHIBITOR_REQUIRED_SETTINGS: (settings) => `The guild is missing the **${settings.join(", ")}** guild setting${settings.length !== 1 ? `s` :""} and thus the command cannot run.`,
+			INHIBITOR_REQUIRED_SETTINGS: (settings) => `The guild is missing the **${settings.join(", ")}** guild setting${settings.length !== 1 ? "s" :""} and thus the command cannot run.`,
 			INHIBITOR_RUNIN: (types) => `${no} This command is only available in ${types} channels.`,
 			INHIBITOR_RUNIN_NONE: (name) => `${no} The ${name} command is not configured to run in any channel.`,
 			
