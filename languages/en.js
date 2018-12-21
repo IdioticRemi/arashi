@@ -273,7 +273,7 @@ module.exports = class extends Language {
 
 			COMMAND_PLAY_DESCRIPTION: `Play music from Youtube (url (playlist or video) or a video"s title) in your voice channel.`,
 			COMMAND_PLAY_NOVOICE: `${no} You need to be in a voice channel in order to play music!`,
-			COMMAND_PLAY_NOPERM: (perm) => `${no} I don"t have the permission to **${perm == "speak" ? "speak** in" : "connect** to"} this channel!`,
+			COMMAND_PLAY_NOPERM: (perm) => `${no} I don"t have the permission to **${perm === "speak" ? "speak** in" : "connect** to"} this channel!`,
 			COMMAND_PLAY_ERRCON: `${no} I couldn"t join the voice channel you"re on.`,
 			COMMAND_PLAY_QUEUEADD: (title, author) => `${add} Added **${title}** by **${author}** to the queue.`,
 			PLAY_NO_RESULTS: (name) => `${no} I"m sorry, I found no results for "**${name}**".`,
@@ -297,7 +297,7 @@ module.exports = class extends Language {
 			COMMAND_NOW_DESCRIPTION: `See or change the volume when playing music.`,
 			COMMAND_VOLUME_VAL: (volume) => `${vol} Current volume is **${volume}%**`,
 			COMMAND_VOLUME_NOPE: `${no} Volume"s value must be included between **0%** and **200%**.`,
-			COMMAND_VOLUME_SUCCESS: (old, volume, tag) => `${old > volume ? volMin : old == volume ? vol :volPlus} Changed volume"s value from **${old}%** to **${volume}%** | User: **${tag}**.`,
+			COMMAND_VOLUME_SUCCESS: (old, volume, tag) => `${old > volume ? volMin : old === volume ? vol :volPlus} Changed volume"s value from **${old}%** to **${volume}%** | User: **${tag}**.`,
 		
 			COMMAND_QUEUE_DESCRIPTION: `See what"s in the queue (image version) when playing music.`,
 			COMMAND_EQUEUE_DESCRIPTION: `See what"s in the queue (embed version) when playing music.`,
@@ -330,7 +330,7 @@ module.exports = class extends Language {
 			COMMAND_REPEAT_SONG: `${repeat1} Repeat is **enabled** for the current **song**.`,
 			COMMAND_REPEAT_QUEUE: `${repeat} Repeat is **enabled** for the current **queue**.`,
 			COMMAND_REPEAT_DISABLED: `${repeat} Repeat is **disabled** for both queue and song.`,
-			COMMAND_REPEAT_SUCCESS: (s, tag) => `${["D", "Q"].includes(s) ? repeat : repeat1} Repeat has been **${s == "D" ? "disabled" : "enabled"}** for **${s == "D" ? "both queue and song" : s == "Q" ? "queue" : "song"}** | User: **${tag}**.`,
+			COMMAND_REPEAT_SUCCESS: (s, tag) => `${["D", "Q"].includes(s) ? repeat : repeat1} Repeat has been **${s === "D" ? "disabled" : "enabled"}** for **${s === "D" ? "both queue and song" : s === "Q" ? "queue" : "song"}** | User: **${tag}**.`,
 			
 			COMMAND_PLAYLIST_DESCRIPTION: `Create, Delete, Get or list your personnal playlists.`,
 			COMMAND_PLAYLIST_CREATE_CHARLIMIT: `${no} The playlist"s name may not exceed 50 characters.`,

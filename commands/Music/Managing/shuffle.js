@@ -21,7 +21,7 @@ module.exports = class extends Command {
 
         const playing = sQueue.songs[sQueue.songID];
         const result = this.shuffle(sQueue.songs);
-        if (result.includes(playing) && result.indexOf(playing) != 0) {
+        if (result.includes(playing) && result.indexOf(playing) !== 0) {
             [result[result.indexOf(playing)], result[0]] = [result[0], result[result.indexOf(playing)]];
         }
         

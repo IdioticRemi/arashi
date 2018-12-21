@@ -22,7 +22,7 @@ module.exports = class extends Command {
 
         const queueDisplay = [
             `**__${message.language.get("COMMAND_QUEUE_PREV")}:__**\`\`\`markdown\n1. ${sQueue.songs[i - 1] ? sQueue.songs[i - 1].title.replace(/\`/g, "") + " <" + sQueue.songs[i].format() + ">" : message.language.get("COMMAND_QUEUE_NOPREV")}\`\`\``,
-            `**__${message.language.get("COMMAND_QUEUE_NOW")}:__**\`\`\`markdown\n0. ${sQueue.songs[i].title.replace(/\`/g, "")} <${sQueue.songs[i].format(sQueue.connection.dispatcher.streamTime / 1000)}/${sQueue.songs[i].format()}>${sQueue.playing == false ? message.language.get("COMMAND_QUEUE_PAUSED") : ""}\`\`\``,
+            `**__${message.language.get("COMMAND_QUEUE_NOW")}:__**\`\`\`markdown\n0. ${sQueue.songs[i].title.replace(/\`/g, "")} <${sQueue.songs[i].format(sQueue.connection.dispatcher.streamTime / 1000)}/${sQueue.songs[i].format()}>${sQueue.playing === false ? message.language.get("COMMAND_QUEUE_PAUSED") : ""}\`\`\``,
             `**__${message.language.get("COMMAND_QUEUE_NEXT")}:__**\`\`\`markdown\n`,
         ]
 

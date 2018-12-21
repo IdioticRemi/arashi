@@ -30,7 +30,7 @@ module.exports = {
             const d = dur * 1000;
             let formatted = moment(d).format("hh:mm:ss");
             let hours = `${parseInt(formatted.split(":")[0]) - 1}`;
-            if (hours.length == 1) hours = `0${hours}`;
+            if (hours.length === 1) hours = `0${hours}`;
             return `${parseInt(hours) > 0 ? `${hours}:` : ""}${formatted.split(":")[1]}:${formatted.split(":")[2]}`;
         }
     }

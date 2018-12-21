@@ -6,11 +6,11 @@ module.exports = class extends Event {
 
 	async run() {
         this.client.user.setActivity(games[i].n + " | v" + version, { type: games[i].t });
-        i == games.length - 1 ? i = 0 : i++;
+        i === games.length - 1 ? i = 0 : i++;
         
         setInterval(() => {
             this.client.user.setActivity(games[i].n + " | v" + version, { type: games[i].t });
-            i == games.length - 1 ? i = 0 : i++;
+            i === games.length - 1 ? i = 0 : i++;
         }, 60000);
     }
 
