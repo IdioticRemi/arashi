@@ -128,7 +128,7 @@ module.exports = class extends Command {
             .on("end", () => {
                 sQueue.songs.length > 0 && sQueue.songs[sQueue.songID < 0 ? 0 : sQueue.songID].repeat === true ? sQueue.songID = sQueue.songID : sQueue.songID = sQueue.songID + 1;
                 return this.play(message, sQueue.songs[sQueue.songID < 0 ? 0 : sQueue.songID]);
-            }).on("error", err => {
+            }).on("error", (err) => {
                 sQueue.text.send(message.language.get("MUSIC_PLAY_ERROR", [err]));
                 this.client.console.error(err);
             }).setVolumeLogarithmic(sQueue.volume / 200);

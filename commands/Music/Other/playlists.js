@@ -67,7 +67,7 @@ module.exports = class extends Command {
 
         const songArray = new Array();
 
-        pl.forEach(song => {
+        pl.forEach((song) => {
             if (songArray.length === 10) return songArray.push(message.language.get("COMMAND_PLAYLIST_MORESONGS", pl.length - 10));
             if (songArray.length === 10 || songArray.length === 11) return;
             songArray.push("<:smallPlus:518379666533515306> [`" + song.title.replace(/\`/g, "\\`") + `\`](${song.url})`);

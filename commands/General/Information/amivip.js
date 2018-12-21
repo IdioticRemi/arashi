@@ -34,7 +34,7 @@ module.exports = class extends Command {
         
         if (!member) return message.sendLocale("COMMAND_AMIVIP_NOTONSERVER");
         
-        if (!member.roles.map(r => r.name).includes("VIP | Very Important Person")) return message.sendLocale("COMMAND_AMIVIP_NOTVIP");
+        if (!member.roles.map((r) => r.name).includes("VIP | Very Important Person")) return message.sendLocale("COMMAND_AMIVIP_NOTVIP");
 
         message.author.settings.update("vip", true);
 

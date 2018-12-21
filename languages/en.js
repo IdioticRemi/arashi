@@ -37,7 +37,7 @@ module.exports = class extends Language {
 			DEFAULT: (key) => `**${key}** has not been localized for **english** yet.`,
 			DEFAULT_LANGUAGE: `Default Language`,
 			PREFIX_REMINDER: (prefix = `@${this.client.user.tag}`) => `The prefix${Array.isArray(prefix) ?
-				`es for this guild are: ${prefix.map(pre => `\`${pre}\``).join(`, `)}` :
+				`es for this guild are: ${prefix.map(pre => `\`${pre}\``).join(", ")}` :
 				` in this guild is set to: \`${prefix}\``
 			}`,
 			
@@ -50,7 +50,7 @@ module.exports = class extends Language {
 			SETTING_GATEWAY_INVALID_TYPE: `The type parameter must be either add or remove.`,
 			SETTING_GATEWAY_INVALID_FILTERED_VALUE: (piece, value) => `${piece.key} doesn"t accept the value: ${value}`,
 			
-			RESOLVER_MULTI_TOO_FEW: (name, min = 1) => `Provided too few ${name}s. Atleast ${min} ${min === 1 ? `is` : `are`} required.`,
+			RESOLVER_MULTI_TOO_FEW: (name, min = 1) => `Provided too few ${name}s. Atleast ${min} ${min === 1 ? "is" : "are"} required.`,
 			RESOLVER_INVALID_BOOL: (name) => `${name} must be true or false.`,
 			RESOLVER_INVALID_CHANNEL: (name) => `${name} must be a channel tag or valid channel id.`,
 			RESOLVER_INVALID_CUSTOM: (name, type) => `${name} must be a valid ${type}.`,
@@ -86,7 +86,7 @@ module.exports = class extends Language {
 			MONITOR_COMMAND_HANDLER_REPROMPT: (tag, error, time, abortOptions) => `${tag} | **${error}** | You have **${time}** seconds to respond to this prompt with a valid argument. Type **${abortOptions.join(`**, **`)}** to abort this prompt.`,
 			MONITOR_COMMAND_HANDLER_REPEATING_REPROMPT: (tag, name, time) => `${tag} | **${name}** is a repeating argument | You have **${time}** seconds to respond to this prompt with additional valid arguments. Type **"CANCEL"** to cancel this prompt.`,
 			MONITOR_COMMAND_HANDLER_ABORTED: `Aborted`,
-			MONITOR_COMMAND_HANDLER_POSSIBILITIES: [`abort`, `stop`],
+			MONITOR_COMMAND_HANDLER_POSSIBILITIES: ["abort", "stop"],
 			
 			INHIBITOR_COOLDOWN: (remaining) => `${no} You have just used this command. You can use this command again in **${remaining} second${remaining === 1 ? `` : `s`}**.`,
 			INHIBITOR_DISABLED: `${no} This command is currently disabled.`,
@@ -94,34 +94,34 @@ module.exports = class extends Language {
 			INHIBITOR_MISSING_BOT_PERMS: (missing) => `${no} Insufficient permissions, missing: **${missing}**.`,
 			INHIBITOR_NSFW: `${no} You may not use NSFW commands in this channel.`,
 			INHIBITOR_PERMISSIONS: `${no} You do not have permission to use this command.`,
-			INHIBITOR_REQUIRED_SETTINGS: (settings) => `The guild is missing the **${settings.join(`, `)}** guild setting${settings.length !== 1 ? `s` : ``} and thus the command cannot run.`,
+			INHIBITOR_REQUIRED_SETTINGS: (settings) => `The guild is missing the **${settings.join(", ")}** guild setting${settings.length !== 1 ? `s` : ``} and thus the command cannot run.`,
 			INHIBITOR_RUNIN: (types) => `${no} This command is only available in ${types} channels.`,
 			INHIBITOR_RUNIN_NONE: (name) => `${no} The ${name} command is not configured to run in any channel.`,
 			
 			COMMAND_BLACKLIST_DESCRIPTION: `Blacklists or un-blacklists users and guilds from the bot.`,
 			COMMAND_BLACKLIST_SUCCESS: (usersAdded, usersRemoved, guildsAdded, guildsRemoved) => [
-				usersAdded.length ? `**Users Added**\n${util.codeBlock(``, usersAdded.join(`, `))}` : ``,
-				usersRemoved.length ? `**Users Removed**\n${util.codeBlock(``, usersRemoved.join(`, `))}` : ``,
-				guildsAdded.length ? `**Guilds Added**\n${util.codeBlock(``, guildsAdded.join(`, `))}` : ``,
-				guildsRemoved.length ? `**Guilds Removed**\n${util.codeBlock(``, guildsRemoved.join(`, `))}` : ``
-			].filter(val => val !== ``).join(`\n`),
+				usersAdded.length ? `**Users Added**\n${util.codeBlock("", usersAdded.join(", "))}` : ``,
+				usersRemoved.length ? `**Users Removed**\n${util.codeBlock("", usersRemoved.join(", "))}` : ``,
+				guildsAdded.length ? `**Guilds Added**\n${util.codeBlock("", guildsAdded.join(", "))}` : ``,
+				guildsRemoved.length ? `**Guilds Removed**\n${util.codeBlock("", guildsRemoved.join(", "))}` : ``
+			].filter(val => val !== "").join("\n"),
 			
 			COMMAND_EVAL_DESCRIPTION: `Evaluates arbitrary Javascript. Reserved for bot owner.`,
 			COMMAND_EVAL_EXTENDEDHELP: [
-				`The eval command evaluates code as-in, any error thrown from it will be handled.`,
-				`It also uses the flags feature. Write --silent, --depth=number or --async to customize the output.`,
-				`The --wait flag changes the time the eval will run. Defaults to 10 seconds. Accepts time in milliseconds.`,
-				`The --output and --output-to flag accept either "file", "log", "haste" or "hastebin".`,
-				`The --delete flag makes the command delete the message that executed the message after evaluation.`,
-				`The --silent flag will make it output nothing.`,
-				`The --depth flag accepts a number, for example, --depth=2, to customize util.inspect"s depth.`,
-				`The --async flag will wrap the code into an async function where you can enjoy the use of await, however, if you want to return something, you will need the return keyword.`,
-				`The --showHidden flag will enable the showHidden option in util.inspect.`,
-				`The --lang and --language flags allow different syntax highlight for the output.`,
-				`The --json flag converts the output to json`,
-				`The --no-timeout flag disables the timeout`,
-				`If the output is too large, it"ll send the output as a file, or in the console if the bot does not have the ATTACH_FILES permission.`
-			].join(`\n`),
+				"The eval command evaluates code as-in, any error thrown from it will be handled.",
+				"It also uses the flags feature. Write --silent, --depth=number or --async to customize the output.",
+				"The --wait flag changes the time the eval will run. Defaults to 10 seconds. Accepts time in milliseconds.",
+				"The --output and --output-to flag accept either `file`, `log`, `haste` or `hastebin`.",
+				"The --delete flag makes the command delete the message that executed the message after evaluation.",
+				"The --silent flag will make it output nothing.",
+				"The --depth flag accepts a number, for example, --depth=2, to customize util.inspect's depth.",
+				"The --async flag will wrap the code into an async function where you can enjoy the use of await, however, if you want to return something, you will need the return keyword.",
+				"The --showHidden flag will enable the showHidden option in util.inspect.",
+				"The --lang and --language flags allow different syntax highlight for the output.",
+				"The --json flag converts the output to json",
+				"The --no-timeout flag disables the timeout",
+				"If the output is too large, it'll send the output as a file, or in the console if the bot does not have the ATTACH_FILES permission."
+			].join("\n"),
 			COMMAND_EVAL_TIMEOUT: (seconds) => `${no} TIMEOUT: Took longer than ${seconds} seconds.`,
 			COMMAND_EVAL_ERROR: (time, output, type) => `${no} **Error**:${output}\n**Type**:${type}\n${time}`,
 			COMMAND_EVAL_OUTPUT: (time, output, type) => `${ye} **Output**:${output}\n**Type**:${type}\n${time}`,
@@ -144,7 +144,7 @@ module.exports = class extends Language {
 			COMMAND_RELOAD_ALL: (type, time) => `${ye} Reloaded all ${type}. (Took: ${time})`,
 			COMMAND_RELOAD_EVERYTHING: (time) => `${ye} Reloaded everything. (Took: ${time})`,
 			
-			COMMAND_REBOOT_DESCRIPTION: `Reboots the bot.`,
+			COMMAND_REBOOT_DESCRIPTION: "Reboots the bot.",
 			COMMAND_REBOOT: `${ye} Rebooting...`,
 			
 			COMMAND_LOAD_DESCRIPTION: `Load a piece from your bot.`,
@@ -159,7 +159,7 @@ module.exports = class extends Language {
 			COMMAND_INVITE: () => [
 				`To add ${this.client.user.username} to your discord guild:`,
 				`<${this.client.invite}>`,
-				util.codeBlock(``, [
+				util.codeBlock("", [
 					`The above link is generated requesting the minimum permissions required to use every command currently.`,
 					`I know not all permissions are right for every guild, so don"t be afraid to uncheck any of the boxes.`,
 					`If you try to use a command that requires more permissions than the bot is granted, it will let you know.`

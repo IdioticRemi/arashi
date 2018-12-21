@@ -42,7 +42,7 @@ module.exports = class extends Command {
     isLanguage(str) {
         const language = this.client.languages.get(str);
         if (language) return language;
-        return undefined;
+        return;
     }
 
 };
