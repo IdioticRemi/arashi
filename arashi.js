@@ -22,7 +22,7 @@ KlasaClient.defaultUserSchema
     .add("vip", "boolean", { default: false });
 
 KlasaClient.defaultGuildSchema
-    .add("channels", "any", { default: { mod: undefined, logs: undefined, welcome: undefined } });
+    .add("channels", "any", { default: { mod: null, logs: null, welcome: null } });
 
 let Arashi = new KlasaClient({
     providers: { default: "firestore", firestore: { credentials: cfg.firebase, databaseURL: cfg.firebase.databaseURL} },

@@ -16,16 +16,16 @@ module.exports = class extends Event {
 
     async init() {
         games = [
-            { n: `a!help`, t: "PLAYING" },
+            { n: "a!help", t: "PLAYING" },
             { n: `${this.client.users.size} users on ${this.client.guilds.size} guilds!`, t: "WATCHING" },
-            { n: `http://discordapp.com/invite/kaZ2jf8`, t: "PLAYING" },
+            { n: "http://discordapp.com/invite/kaZ2jf8", t: "PLAYING" },
             { n: `with it"s owner: ${this.client.owner.username}`, t: "PLAYING" },
-            { n: `a!help`, t: "PLAYING" },
-            { n: `K-POP!`, t: "LISTENING" },
+            { n: "a!help", t: "PLAYING" },
+            { n: "K-POP!", t: "LISTENING" },
             { n: "with Rimuru Tempest!", t: "PLAYING" },
-            { n: `a!help`, t: "PLAYING" },
-            { n: `japanese ads!`, t: "WATCHING" },
-            { n: `the llama song`, t: "LISTENING" },
+            { n: "a!help", t: "PLAYING" },
+            { n: "japanese ads!", t: "WATCHING" },
+            { n: "the llama song", t: "LISTENING" },
         ]
         i = Math.floor(Math.random() * (games.length - 1));
     }

@@ -131,8 +131,8 @@ module.exports = class extends Command {
 
 	async getHaste(evalResult, language) {
 		const key = await fetch("https://hastebin.com/documents", { method: "POST", body: evalResult })
-			.then(response => response.json())
-			.then(body => body.key);
+			.then((response) => response.json())
+			.then((body) => body.key);
 		return `https://hastebin.com/${key}.${language}`;
 	}
 
