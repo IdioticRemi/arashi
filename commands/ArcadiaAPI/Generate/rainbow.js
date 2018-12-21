@@ -11,7 +11,7 @@ module.exports = class extends Command {
             requiredPermissions: ["ATTACH_FILES"],
             aliases: [],
             cooldown: 0,
-            description: (language) => language.get(`COMMAND_ARCADIA_GEN_DESCRIPTION`, [require("klasa").util.toTitleCase(this.name)]),
+            description: (language) => language.get("COMMAND_ARCADIA_GEN_DESCRIPTION", [require("klasa").util.toTitleCase(this.name)]),
             usage: "[img:url]",
         });
 
