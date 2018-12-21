@@ -150,7 +150,7 @@ module.exports = class extends Language {
 			COMMAND_LOAD_DESCRIPTION: "Load a piece from your bot.",
 			COMMAND_LOAD: (time, type, name) => `${ye} Successfully loaded ${type}: ${name}. (Took: ${time})`,
 			COMMAND_LOAD_FAIL: `${no} The file does not exist, or an error occurred while loading your file. Please check your console.`,
-			COMMAND_LOAD_ERROR: (type, name, error) => `${no} Failed to load ${type}: ${name}. Reason:${util.codeBlock(`js`, error)}`,
+			COMMAND_LOAD_ERROR: (type, name, error) => `${no} Failed to load ${type}: ${name}. Reason:${util.codeBlock("js", error)}`,
 			
 			COMMAND_PING_DESCRIPTION: "Runs a connection test to Discord.",
 			COMMAND_PING: `${minus} Ping?`,
@@ -218,7 +218,7 @@ module.exports = class extends Language {
 				`• Discord.js: \`v${discordVersion}\``,
 				`• Node.js: \`${processVersion}\``,
 				`• Shards: \`${(message.guild ? message.guild.shardID : 0) + 1} / ${this.client.options.totalShardCount}\``
-			].join(`\n`),
+			].join("\n"),
 
 			COMMAND_STATS_DESCRIPTION: "Provides some details about the bot and stats.",
 			
@@ -294,7 +294,7 @@ module.exports = class extends Language {
 			COMMAND_NOW_DESCRIPTION: "See what's the current song's name when playing music.",
 			COMMAND_NOW_SUCCESS: (title, tag) => `${play} Now Playing: **${title}**, requested by **${tag}**.`,
 
-			COMMAND_NOW_DESCRIPTION: "See or change the volume when playing music.",
+			COMMAND_VOLUME_DESCRIPTION: "See or change the volume when playing music.",
 			COMMAND_VOLUME_VAL: (volume) => `${vol} Current volume is **${volume}%**`,
 			COMMAND_VOLUME_NOPE: `${no} Volume"s value must be included between **0%** and **200%**.`,
 			COMMAND_VOLUME_SUCCESS: (old, volume, tag) => `${old > volume ? volMin : old === volume ? vol :volPlus} Changed volume"s value from **${old}%** to **${volume}%** | User: **${tag}**.`,
@@ -311,28 +311,28 @@ module.exports = class extends Language {
 			COMMAND_QUEUE_PAUSED: " (PAUSED)",
 			COMMAND_QUEUE_MORESONGS: (amount) => `\nAnd ${amount} more song(s)...`,
 
-			COMMAND_PAUSE_DESCRIPTION: `Pause the current song when playing music.`,
+			COMMAND_PAUSE_DESCRIPTION: "Pause the current song when playing music.",
 			COMMAND_PAUSE_NOVOICE: (channel) => `${no} You need to be inside the **${channel}** channel in order to pause the current song!`,
 			COMMAND_PAUSE_PAUSED: `${no} The song is already paused!`,
 			COMMAND_PAUSE_SUCCESS: (title, tag) => `${pause} Paused **${title}** | User: **${tag}**.`,
 
-			COMMAND_RESUME_DESCRIPTION: `Resume the current song when playing music.`,
+			COMMAND_RESUME_DESCRIPTION: "Resume the current song when playing music.",
 			COMMAND_RESUME_NOVOICE: (channel) => `${no} You need to be inside the **${channel}** channel in order to resume the current song!`,
 			COMMAND_RESUME_PLAYING: `${no} The song is already playing!`,
 			COMMAND_RESUME_SUCCESS: (title, tag) => `${resume} Resumed **${title}** | User: **${tag}**.`,
 
-			COMMAND_SHUFFLE_DESCRIPTION: `Shuffle the queue when playing music.`,
+			COMMAND_SHUFFLE_DESCRIPTION: "Shuffle the queue when playing music.",
 			COMMAND_SHUFFLE_NOVOICE: (channel) => `${no} You need to be inside the **${channel}** channel in order to shuffle the queue!`,
 			COMMAND_SHUFFLE_SUCCESS: `${shuffle} Successfuly shuffled the queue.`,
 
-			COMMAND_REPEAT_DESCRIPTION: `Change repeat status when playing music.`,
+			COMMAND_REPEAT_DESCRIPTION: "Change repeat status when playing music.",
 			COMMAND_REPEAT_NOVOICE: (channel) => `${no} You need to be inside the **${channel}** channel in order to change the repeat status!`,
 			COMMAND_REPEAT_SONG: `${repeat1} Repeat is **enabled** for the current **song**.`,
 			COMMAND_REPEAT_QUEUE: `${repeat} Repeat is **enabled** for the current **queue**.`,
 			COMMAND_REPEAT_DISABLED: `${repeat} Repeat is **disabled** for both queue and song.`,
 			COMMAND_REPEAT_SUCCESS: (s, tag) => `${["D", "Q"].includes(s) ? repeat : repeat1} Repeat has been **${s === "D" ? "disabled" : "enabled"}** for **${s === "D" ? "both queue and song" : s === "Q" ? "queue" : "song"}** | User: **${tag}**.`,
 			
-			COMMAND_PLAYLIST_DESCRIPTION: `Create, Delete, Get or list your personnal playlists.`,
+			COMMAND_PLAYLIST_DESCRIPTION: "Create, Delete, Get or list your personnal playlists.",
 			COMMAND_PLAYLIST_CREATE_CHARLIMIT: `${no} The playlist"s name may not exceed 50 characters.`,
 			COMMAND_PLAYLIST_CREATE_USERLIMIT: (playlist) => `${no} Cannot create the playlist \`${playlist}\` : You can"t have more than **2** playlists\n${vip} Consider buying **VIP** to get the ability of having **18 more**!`,
 			COMMAND_PLAYLIST_CREATE_VIPLIMIT: (playlist) => `${dataNo} Cannot create the playlist \`${playlist}\` : You can"t have more than **20** playlists.`,
@@ -344,15 +344,15 @@ module.exports = class extends Language {
 			COMMAND_PLAYLIST_NULL: (playlist) => `${dataNo} The playlist **${playlist}** does not exist!`,
 			COMMAND_PLAYLIST_NOTANY: `${dataNo} You don"t have any playlist!`,
 		
-			COMMAND_ANNOUNCE_DESCRIPTION: `Send a message that mentions everyone in the specified channel`,
+			COMMAND_ANNOUNCE_DESCRIPTION: "Send a message that mentions everyone in the specified channel",
 			COMMAND_ANNOUNCE_NOCHANNEL: `${no} You must provide a **channel ID** or a **channel mention**.`,
 			COMMAND_ANNOUNCE_SUCCESS: (channel) => `${ye} Successfuly sent the message to ${channel}.`,
 
-			COMMAND_AMIVIP_DESCRIPTION: `Get your VIP advantages if you are one. If you are-- SURPRISE!`,
-			COMMAND_AMIVIP_ALREADY: `\\🍣👌\\🍣 You already got your glorious welcome! Thanks for being a VIP but-- You can"t run this again!`,
-			COMMAND_AMIVIP_NOTONSERVER: `\\🍣 You"re not a real member of our community! (join here: https://discord.gg/kaZ2jf8)`,
-			COMMAND_AMIVIP_NOTVIP: `\\🍣 **YOU SHALL NOT PASS!** (You don"t have the VIP role on the official guild)`,
-			COMMAND_AMIVIP_TITLE: `🍣 A NEW MEMBER BECAME A VIP USER! YAY!!`,
+			COMMAND_AMIVIP_DESCRIPTION: "Get your VIP advantages if you are one. If you are-- SURPRISE!",
+			COMMAND_AMIVIP_ALREADY: "\\🍣👌\\🍣 You already got your glorious welcome! Thanks for being a VIP but-- You can't run this again!",
+			COMMAND_AMIVIP_NOTONSERVER: "\\🍣 You're not a real member of our community! (join here: https://discord.gg/kaZ2jf8)",
+			COMMAND_AMIVIP_NOTVIP: "\\🍣 **YOU SHALL NOT PASS!** (You don't have the VIP role on the official guild)",
+			COMMAND_AMIVIP_TITLE: "🍣 A NEW MEMBER BECAME A VIP USER! YAY!!",
 			COMMAND_AMIVIP_YOUARE: (tag) => `🍣 Welcome to **${tag}** in the VIP users community! *yay* 🍣`,
 
 			COMMAND_ARCADIA_FILTER_DESCRIPTION: (type) => `Arcadia: ${type} filter.`,
