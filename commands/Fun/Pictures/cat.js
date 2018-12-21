@@ -8,7 +8,7 @@ module.exports = class extends Command {
 		super(...args, {
             cooldown: 10,
 			aliases: ["randomcat", "meow"],
-			description: language => language.get("COMMAND_CAT_DESCRIPTION")
+			description: (language) => language.get("COMMAND_CAT_DESCRIPTION")
 		});
 	}
 

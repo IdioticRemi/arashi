@@ -7,7 +7,7 @@ module.exports = class extends Command {
 			runIn: ["text"],
 			guarded: true,
 			cooldown: 5,
-			description: language => language.get("COMMAND_INVITE_DESCRIPTION")
+			description: (language) => language.get("COMMAND_INVITE_DESCRIPTION")
 		});
 	}
 

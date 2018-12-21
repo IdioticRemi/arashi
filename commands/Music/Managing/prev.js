@@ -7,7 +7,7 @@ module.exports = class extends Command {
             runIn: ["text"],
             cooldown: 3,
             aliases: ["next", "sk"],
-			description: language => language.get("COMMAND_PREV_DESCRIPTION"),
+			description: (language) => language.get("COMMAND_PREV_DESCRIPTION"),
             usage: ""
 		});
     }

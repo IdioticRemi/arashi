@@ -7,7 +7,7 @@ module.exports = class extends Command {
             runIn: ["text"],
             cooldown: 3,
             aliases: ["re", "resong", "qloop", "queueloop", "lq", "loopqueue", "replay"],
-            description: language => language.get("COMMAND_REPEAT_DESCRIPTION"),
+            description: (language) => language.get("COMMAND_REPEAT_DESCRIPTION"),
             subcommands: true,
             usage: "<queue|song|disable|get:default>"
 		});

@@ -22,7 +22,7 @@ module.exports = class extends Command {
             runIn: ["text", "dm"],
             cooldown: 5,
             aliases: ["amvip", "iamvip", "checkvip", "vipcheck"],
-            description: language => language.get("COMMAND_AMIVIP_DESCRIPTION"),
+            description: (language) => language.get("COMMAND_AMIVIP_DESCRIPTION"),
             usage: "",
         });
     }

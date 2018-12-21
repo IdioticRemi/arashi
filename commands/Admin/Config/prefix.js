@@ -8,7 +8,7 @@ module.exports = class extends Command {
             aliases: ["pref", "prefixes"],
             permissionLevel: 6,
             cooldown: 3,
-            description: language => language.get("COMMAND_PREFIX_DESCRIPTION"),
+            description: (language) => language.get("COMMAND_PREFIX_DESCRIPTION"),
             subcommands: true,
             usage: "[add|remove|reset|show:default] (value:value)",
             usageDelim: " "

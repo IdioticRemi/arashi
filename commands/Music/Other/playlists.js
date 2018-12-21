@@ -8,7 +8,7 @@ module.exports = class extends Command {
             runIn: ["text"],
             cooldown: 10,
             aliases: ["pl", "playlist"],
-            description: language => language.get("COMMAND_PLAYLIST_DESCRIPTION"),
+            description: (language) => language.get("COMMAND_PLAYLIST_DESCRIPTION"),
             subcommands: true,
             usage: "<create|delete|get|list:default> (value:value) [...]",
             usageDelim: " "

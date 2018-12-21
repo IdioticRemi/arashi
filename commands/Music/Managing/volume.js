@@ -7,7 +7,7 @@ module.exports = class extends Command {
             runIn: ["text"],
             cooldown: 3,
             aliases: ["vol", "vo"],
-			description: language => language.get("COMMAND_SKIP_DESCRIPTION"),
+			description: (language) => language.get("COMMAND_SKIP_DESCRIPTION"),
             usage: "[volume:integer]"
 		});
     }

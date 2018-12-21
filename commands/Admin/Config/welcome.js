@@ -8,7 +8,7 @@ module.exports = class extends Command {
             aliases: ["welc", "welcomechannel", "wc", "welcchannel", "welcchan"],
             permissionLevel: 6,
             cooldown: 3,
-            description: language => language.get("COMMAND_WELCOME_DESCRIPTION"),
+            description: (language) => language.get("COMMAND_WELCOME_DESCRIPTION"),
             subcommands: true,
             usage: "<set|reset|show:default> [channel:String]",
             usageDelim: " "

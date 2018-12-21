@@ -12,7 +12,7 @@ module.exports = class extends Command {
             runIn: ["text"],
             cooldown: 3,
             aliases: ["pl", "music"],
-			description: language => language.get("COMMAND_PLAY_DESCRIPTION"),
+			description: (language) => language.get("COMMAND_PLAY_DESCRIPTION"),
             usage: "<text:String> [...]",
             requiredPermissions: ["CONNECT", "SPEAK"]
         });
@@ -42,7 +42,7 @@ module.exports = class extends Command {
             const playlist = message.author.settings.playlists[searchString.toLowerCase()];
 
             for (const video of Object.values(playlist)) {
-                const vid = await this.yt.getVideo(video.url).catch(error => { return; });
+                const vid = await this.yt.getVideo(video.url).catch((error) => { return; });
                 if (!vid) continue;
                 await this.handleVideo(vid, message, voice, true);
             }
@@ -54,7 +54,7 @@ module.exports = class extends Command {
 
             for (const video of Object.values(videos)) {
                 if (video.raw.status.privacyStatus === "private") return;
-                const vid = await this.yt.getVideoByID(video.id).catch(error => { return; });
+                const vid = await this.yt.getVideoByID(video.id).catch((error) => { return; });
                 await this.handleVideo(vid, message, voice, true);
             }
 

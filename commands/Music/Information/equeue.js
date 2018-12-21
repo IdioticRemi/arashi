@@ -8,7 +8,7 @@ module.exports = class extends Command {
             runIn: ["text"],
             cooldown: 3,
             aliases: ["embedqueue", "eq", "embedsongs", "esongs"],
-			description: language => language.get("COMMAND_EQUEUE_DESCRIPTION"),
+			description: (language) => language.get("COMMAND_EQUEUE_DESCRIPTION"),
             usage: ""
 		});
     }

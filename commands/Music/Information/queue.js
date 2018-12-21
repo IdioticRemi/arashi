@@ -14,7 +14,7 @@ module.exports = class extends Command {
             permissionLevel: 10,
             aliases: ["q", "songlist", "list", "qu"],
             requiredPermissions: ["ATTACH_FILES"],
-			description: language => language.get("COMMAND_QUEUE_DESCRIPTION"),
+			description: (language) => language.get("COMMAND_QUEUE_DESCRIPTION"),
             usage: ""
 		});
     }

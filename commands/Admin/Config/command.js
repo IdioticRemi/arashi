@@ -8,7 +8,7 @@ module.exports = class extends Command {
             aliases: ["cmd", "cmds", "commands"],
             permissionLevel: 6,
             cooldown: 3,
-            description: language => language.get("COMMAND_LANGUAGE_DESCRIPTION"),
+            description: (language) => language.get("COMMAND_LANGUAGE_DESCRIPTION"),
             subcommands: true,
             usage: "<enable|disable|reset|show:default> [command:command]",
             usageDelim: " "

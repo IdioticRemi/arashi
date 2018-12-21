@@ -8,7 +8,7 @@ module.exports = class extends Command {
             permissionlevel: 5,
             cooldown: 10,
             aliases: ["an", "broadcast", "bc"],
-			description: language => language.get("COMMAND_ANNOUNCE_DESCRIPTION"),
+			description: (language) => language.get("COMMAND_ANNOUNCE_DESCRIPTION"),
             usage: "<channel:chan> <message:String> [...]",
             usageDelim: " ",
             requiredPermissions: ["MENTION_EVERYONE"]

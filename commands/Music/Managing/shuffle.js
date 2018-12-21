@@ -7,7 +7,7 @@ module.exports = class extends Command {
             runIn: ["text"],
             cooldown: 10,
             aliases: ["shufle", "reroll", "rqueue"],
-			description: language => language.get("COMMAND_SHUFFLE_DESCRIPTION"),
+			description: (language) => language.get("COMMAND_SHUFFLE_DESCRIPTION"),
             usage: ""
 		});
     }
