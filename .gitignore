@@ -81,3 +81,9 @@ typings/
 
 # DynamoDB Local files
 .dynamodb/
+
+# Hidden files
+config.js
+
+# Hidden folders
+bwd
