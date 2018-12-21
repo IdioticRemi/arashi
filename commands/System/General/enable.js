@@ -1,4 +1,4 @@
-const { Command } = require('klasa');
+const { Command } = require("klasa");
 
 module.exports = class extends Command {
 
@@ -6,8 +6,8 @@ module.exports = class extends Command {
 		super(...args, {
 			permissionLevel: 10,
 			guarded: true,
-			description: language => language.get('COMMAND_ENABLE_DESCRIPTION'),
-			usage: '<Piece:piece>'
+			description: language => language.get("COMMAND_ENABLE_DESCRIPTION"),
+			usage: "<Piece:piece>"
 		});
 	}
 
@@ -15,10 +15,10 @@ module.exports = class extends Command {
 		piece.enable();
 		if (this.client.shard) {
 			await this.client.shard.broadcastEval(`
-				if (String(this.shard.id) !== '${this.client.shard.id}') this.${piece.store}.get('${piece.name}').enable();
+				if (String(this.shard.id) !== "${this.client.shard.id}") this.${piece.store}.get("${piece.name}").enable();
 			`);
 		}
-		return message.sendCode('diff', message.language.get('COMMAND_ENABLE', piece.type, piece.name));
+		return message.sendCode("diff", message.language.get("COMMAND_ENABLE", piece.type, piece.name));
 	}
 
 };

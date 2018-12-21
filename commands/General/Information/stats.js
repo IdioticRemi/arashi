@@ -1,12 +1,12 @@
-const { Command, version: klasaVersion, Duration } = require('klasa');
-const { version: discordVersion, MessageEmbed } = require('discord.js');
+const { Command, version: klasaVersion, Duration } = require("klasa");
+const { version: discordVersion, MessageEmbed } = require("discord.js");
 
 module.exports = class extends Command {
 
 	constructor(...args) {
 		super(...args, {
 			guarded: true,
-			description: language => language.get('COMMAND_STATS_DESCRIPTION')
+			description: language => language.get("COMMAND_STATS_DESCRIPTION")
 		});
 	}
 
@@ -23,7 +23,7 @@ module.exports = class extends Command {
 			}
 		}
 
-		const text = message.language.get('COMMAND_STATS',
+		const text = message.language.get("COMMAND_STATS",
 			(memory || process.memoryUsage().heapUsed / 1024 / 1024).toFixed(2),
 			Duration.toNow(Date.now() - (process.uptime() * 1000)),
 			(users || this.client.users.size).toLocaleString(),
@@ -31,7 +31,7 @@ module.exports = class extends Command {
 			(channels || this.client.channels.size).toLocaleString(),
 			klasaVersion, discordVersion, process.version, message);
 
-		const embed = new MessageEmbed().setColor('GREEN').setThumbnail(this.client.user.avatarURL()).setDescription(text).setFooter(message.language.get('REQUESTED', [message.author.tag]), message.author.avatarURL()).setTimestamp();
+		const embed = new MessageEmbed().setColor("GREEN").setThumbnail(this.client.user.avatarURL()).setDescription(text).setFooter(message.language.get("REQUESTED", [message.author.tag]), message.author.avatarURL()).setTimestamp();
 
 		return message.channel.send(embed);
 	}

@@ -1,4 +1,4 @@
-const { Command } = require('klasa');
+const { Command } = require("klasa");
 
 module.exports = class extends Command {
 
@@ -6,22 +6,22 @@ module.exports = class extends Command {
 		super(...args, {
 			permissionLevel: 10,
 			guarded: true,
-			description: language => language.get('COMMAND_DISABLE_DESCRIPTION'),
-			usage: '<Piece:piece>'
+			description: language => language.get("COMMAND_DISABLE_DESCRIPTION"),
+			usage: "<Piece:piece>"
 		});
 	}
 
 	async run(message, [piece]) {
-		if ((piece.type === 'event' && piece.name === 'message') || (piece.type === 'monitor' && piece.name === 'commandHandler')) {
-			return message.sendLocale('COMMAND_DISABLE_WARN');
+		if ((piece.type === "event" && piece.name === "message") || (piece.type === "monitor" && piece.name === "commandHandler")) {
+			return message.sendLocale("COMMAND_DISABLE_WARN");
 		}
 		piece.disable();
 		if (this.client.shard) {
 			await this.client.shard.broadcastEval(`
-				if (String(this.shard.id) !== '${this.client.shard.id}') this.${piece.store}.get('${piece.name}').disable();
+				if (String(this.shard.id) !== "${this.client.shard.id}") this.${piece.store}.get("${piece.name}").disable();
 			`);
 		}
-		return message.sendLocale('COMMAND_DISABLE', [piece.type, piece.name], { code: 'diff' });
+		return message.sendLocale("COMMAND_DISABLE", [piece.type, piece.name], { code: "diff" });
 	}
 
 };

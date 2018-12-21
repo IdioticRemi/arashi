@@ -1,4 +1,4 @@
-const { Event } = require('klasa');
+const { Event } = require("klasa");
 
 const msg = [
     `Thank you for inviting me to your server!`,
@@ -13,7 +13,7 @@ module.exports = class extends Event {
 
 	async run(guild) {
         if (!guild.available) return;
-        guild.systemChannel.send(msg.join('\n')).catch(() => null);
+        guild.systemChannel.send(msg.join("\n")).catch(() => null);
     }
 
 }

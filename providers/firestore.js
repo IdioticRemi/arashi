@@ -1,5 +1,5 @@
-const { Provider } = require('klasa');
-const firebase = require('firebase-admin');
+const { Provider } = require("klasa");
+const firebase = require("firebase-admin");
 
 module.exports = class extends Provider {
 

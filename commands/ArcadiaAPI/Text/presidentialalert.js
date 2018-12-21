@@ -1,21 +1,21 @@
-const { Command } = require('klasa');
-const { MessageAttachment } = require('discord.js');
-const Arcadia = require('arcadia-module');
+const { Command } = require("klasa");
+const { MessageAttachment } = require("discord.js");
+const Arcadia = require("arcadia-module");
 
 module.exports = class extends Command {
 
     constructor(...args) {
         super(...args, {
             enabled: true,
-            runIn: ['text', 'dm', 'group'],
-            requiredPermissions: ['ATTACH_FILES'],
+            runIn: ["text", "dm", "group"],
+            requiredPermissions: ["ATTACH_FILES"],
             aliases: [],
             cooldown: 0,
-            description: (language) => language.get(`COMMAND_ARCADIA_TEXT_DESCRIPTION`, [require('klasa').util.toTitleCase(this.name)]),
-            usage: '[text:String] [...]',
+            description: (language) => language.get(`COMMAND_ARCADIA_TEXT_DESCRIPTION`, [require("klasa").util.toTitleCase(this.name)]),
+            usage: "[text:String] [...]",
         });
 
-        this.customizeResponse('img', (message) => message.sendLocale('ARCADIA_INVALID_URL'));
+        this.customizeResponse("img", (message) => message.sendLocale("ARCADIA_INVALID_URL"));
     }
 
     async run(message, [...text]) {

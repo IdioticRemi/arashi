@@ -1,23 +1,23 @@
-const { Command } = require('klasa');
+const { Command } = require("klasa");
 
 module.exports = class extends Command {
 
     constructor(...args) {
 		super(...args, {
-            runIn: ['text'],
+            runIn: ["text"],
             cooldown: 10,
-            aliases: ['shufle', 'reroll', 'rqueue'],
-			description: language => language.get('COMMAND_SHUFFLE_DESCRIPTION'),
-            usage: ''
+            aliases: ["shufle", "reroll", "rqueue"],
+			description: language => language.get("COMMAND_SHUFFLE_DESCRIPTION"),
+            usage: ""
 		});
     }
 
     async run(message, [...params]) {
         const sQueue = this.client.queues.get(message.guild.id);
 
-        if (!sQueue) return message.sendLocale('MUSIC_NOT_PLAYING');
+        if (!sQueue) return message.sendLocale("MUSIC_NOT_PLAYING");
 
-        if (!sQueue.voice.members.get(message.author.id)) return message.sendLocale('COMMAND_SHUFFLE_NOVOICE', [sQueue.voice.name]);
+        if (!sQueue.voice.members.get(message.author.id)) return message.sendLocale("COMMAND_SHUFFLE_NOVOICE", [sQueue.voice.name]);
 
         const playing = sQueue.songs[sQueue.songID];
         const result = this.shuffle(sQueue.songs);
@@ -28,7 +28,7 @@ module.exports = class extends Command {
         sQueue.songID = 0;
         sQueue.songs = result;
 
-        message.sendLocale('COMMAND_SHUFFLE_SUCCESS');
+        message.sendLocale("COMMAND_SHUFFLE_SUCCESS");
     }
 
     shuffle(a) {
