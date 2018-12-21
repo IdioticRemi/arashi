@@ -19,7 +19,7 @@ module.exports = class extends Command {
     }
 
     async run(message, [type = 1, img]) {
-        const buff = await Arcadia.generation(this.name.toLowerCase(), img != undefined ? img : message.author.avatarURL({ format: "png" }), type);
+        const buff = await Arcadia.generation(this.name.toLowerCase(), img ? img : message.author.avatarURL({ format: "png" }), type);
         message.channel.send(new MessageAttachment(buff, `${this.name.toLowerCase()}-${message.author.id}.gif`));
     }
 

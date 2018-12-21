@@ -1,4 +1,4 @@
-const { Language, util } = require(`klasa`);
+const { Language, util } = require("klasa");
 const ye = `<:ye:518161458874286112>`,
 	no = `<:no:518161458299797504>`,
 	plus = `<:plus:518161458329026575>`,
