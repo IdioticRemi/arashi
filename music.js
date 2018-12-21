@@ -11,7 +11,7 @@ module.exports = {
             this.songID = 0,
             this.volume = 100,
             this.playing = true,
-            this.repeat = false
+            this.repeat = false;
         }
     },
     Song: class Song {
@@ -23,7 +23,7 @@ module.exports = {
             this.url = `https://www.youtube.com/watch?v=${video.id}`,
             this.duration = (video.duration.hours * 3600) + (video.duration.minutes * 60) + video.duration.seconds,
             this.user = user,
-            this.repeat = false
+            this.repeat = false;
         }
 
         format(dur = this.duration) {
