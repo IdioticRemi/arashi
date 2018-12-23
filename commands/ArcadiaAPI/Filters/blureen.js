@@ -13,7 +13,7 @@ module.exports = class extends Command {
             requiredPermissions: ["ATTACH_FILES"],
             aliases: [],
             cooldown: 0,
-            description: (language) => language.get("COMMAND_ARCADIA_GEN_DESCRIPTION", [require("klasa").util.toTitleCase(this.name)]),
+            description: (language) => language.get("COMMAND_ARCADIA_FILTER_DESCRIPTION", [require("klasa").util.toTitleCase(this.name)]),
             usage: "[img:url]",
         });
 
@@ -22,7 +22,7 @@ module.exports = class extends Command {
     }
 
     async run(message, [img]) {
-        const { buffer } = await this.Arcadia.generate(this.name.toLowerCase(), img ? img : message.author.avatarURL({ format: "png" }));
+        const { buffer } = await this.Arcadia.filter(this.name.toLowerCase(), img ? img : message.author.avatarURL({ format: "png" }));
         message.channel.send(new MessageAttachment(buffer, `${this.name.toLowerCase()}-${message.author.id}.png`));
     }
 

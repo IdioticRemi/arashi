@@ -1,6 +1,8 @@
 const { Command } = require("klasa");
 const { MessageAttachment } = require("discord.js");
-const Arcadia = require("arcadia-module");
+const Config = require("../../../config");
+const cfg = new Config();
+const ArcadiaAPI = require("arcadia.js-unoff");
 
 module.exports = class extends Command {
 
@@ -15,12 +17,13 @@ module.exports = class extends Command {
             usage: "[img:url]",
         });
 
+        this.Arcadia = new ArcadiaAPI(cfg.arcadia);
         this.customizeResponse("img", (message) => message.sendLocale("ARCADIA_INVALID_URL"));
     }
 
     async run(message, [img]) {
-        const buff = await Arcadia.generation(this.name.toLowerCase(), img ? img : message.author.avatarURL({ format: "png" }));
-        message.channel.send(new MessageAttachment(buff, `${this.name.toLowerCase()}-${message.author.id}.png`));
+        const { buffer } = await this.Arcadia.generate(this.name.toLowerCase(), img ? img : message.author.avatarURL({ format: "png" }));
+        message.channel.send(new MessageAttachment(buffer, `${this.name.toLowerCase()}-${message.author.id}.png`));
     }
 
 };
