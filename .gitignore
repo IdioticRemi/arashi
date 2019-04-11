@@ -85,6 +85,7 @@ typings/
 # Hidden files
 config.js
 To-Do.js
+.idea
 
 # Hidden folders
 bwd
