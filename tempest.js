@@ -1,6 +1,8 @@
 const { Permissions: { FLAGS } } = require("discord.js");
-const config = require("./config.js");
+const config = require("./config");
 const Klasa = require("klasa");
+
+require("./prototypes");
 
 const cfg = new config();
 
@@ -24,16 +26,24 @@ KlasaClient.defaultUserSchema
 KlasaClient.defaultGuildSchema
     .add("channels", "any", { default: { mod: null, logs: null, welcome: null } });
 
-let Arashi = new KlasaClient({
-    providers: { default: "firestore", firestore: { credentials: cfg.firebase, databaseURL: cfg.firebase.databaseURL} },
+let Tempest = new KlasaClient({
+    providers: { default: "json"/*, mongodb: {
+            connectionString: cfg.mongo.connectionString,
+            user: cfg.mongo.user,
+            password: cfg.mongo.password,
+            host: cfg.mongo.host,
+            port: cfg.mongo.port,
+            db: cfg.mongo.db
+        }*/
+    },
+    preserveSettings: false,
     fetchAllMembers: false,
     commandLogging: true,
     language: "en",
-    noPrefixDM: true,
-    prefix: ["a!", "a$"],
-    readyMessage: (client) => `Successfully initialized. Ready to serve ${client.guilds.size} guilds.`
+    prefix: ["t!", "t$"],
+    readyMessage: (client) => `Successfully loaded. Ready to serve ${client.guilds.size} guilds.`
 });
 
-Arashi.queues = new Map();
+Tempest.queues = new Map();
 
-Arashi.login(cfg.token);
+Tempest.login(cfg.token);

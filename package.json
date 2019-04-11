@@ -2,9 +2,9 @@
   "name": "arashi",
   "version": "0.0.1",
   "description": "Arashi, a good public discord.js-made Discord bot.",
-  "main": "arashi.js",
+  "main": "tempest.js",
   "scripts": {
-    "test": "node arashi.js"
+    "test": "node tempest.js"
   },
   "repository": {
     "type": "git",
@@ -18,21 +18,23 @@
   },
   "homepage": "https://github.com/Kizuru/Arashi#readme",
   "dependencies": {
-    "arcadia.js-unoff": "^1.0.1",
-    "bufferutil": "^4.0.0",
+    "arcadia.js-unoff": "^1.0.2",
+    "bufferutil": "^4.0.1",
     "canvas": "github:Automattic/node-canvas#92b192447e9b9ae98da0f801e4e34afdd1dc1ef8",
-    "canvas-constructor": "^2.0.1",
+    "canvas-constructor": "github:kyranet/canvasConstructor",
     "discord.js": "github:discordjs/discord.js",
     "erlpack": "github:discordapp/erlpack",
-    "firebase-admin": "^6.3.0",
+    "firebase-admin": "^6.5.1",
     "klasa": "github:dirigeants/Klasa",
-    "moment": "^2.22.2",
+    "moment": "^2.24.0",
+    "moment-duration-format": "^2.2.2",
+    "mongodb": "^3.2.2",
     "node-fetch": "^2.3.0",
     "node-opus": "^0.3.1",
     "simple-youtube-api": "^5.1.1",
     "snekfetch": "^4.0.4",
     "sodium": "^3.0.2",
-    "ytdl-core": "^0.28.0",
+    "ytdl-core": "^0.28.3",
     "zlib-sync": "^0.1.4"
   }
 }

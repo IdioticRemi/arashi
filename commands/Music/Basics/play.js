@@ -87,7 +87,8 @@ module.exports = class extends Command {
             sQueue.songs.push(song);
 
             try {
-                var connection = await voice.join();
+                const connection = await voice.join();
+                await message.guild.me.setDeaf(true).catch(() => 1);
                 sQueue.connection = connection;
                 this.play(message, song);
             } catch (err) {

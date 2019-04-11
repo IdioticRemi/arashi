@@ -54,9 +54,10 @@ module.exports = class extends Command {
         const sTime = sQueue.songs[sQueue.songID].duration * 1000;
         const percent = 850 * played/sTime;
         const { body: icon } = await get(guild.iconURL({ format: "png", size: 128 }));
+
         const queue = new Canvas(900, 835)
-        // Background
-            .setColor("#1eafed")
+            // Background
+            .setColor("#F95959")
             .addRect(0, 0, 900, 835)
             // Categories" boxesand title box
             .setColor("#23272A")
@@ -81,7 +82,7 @@ module.exports = class extends Command {
             .setColor("#23272A")
             .addRect(20, 440, 860, 40)
             // Add Categories"s title
-            .setColor("#BABABA")
+            .setColor("#FACF5A")
             .setTextFont("30px BoldicFont")
             .addText(lang.get("COMMAND_QUEUE_PREV"), 450, 185)
             .addText(lang.get("COMMAND_QUEUE_NOW"), 450, 345)
@@ -94,7 +95,7 @@ module.exports = class extends Command {
             .addText(queueSongs[3] ? queueSongs[3].time ? queueSongs[3].time : "--:--:--" : "", 870, 685)
             .addText(queueSongs[4] ? queueSongs[4].time ? queueSongs[4].time : "--:--:--" : "", 870, 735)
             // Progress Bar
-            .setColor("#1eafed")
+            .setColor("#F95959")
             .addRect(25, 445, percent, 30)
             // Time played and categories" content
             .setColor("#FFFFFF")
@@ -105,8 +106,7 @@ module.exports = class extends Command {
             .addText(this.lengthify(queueSongs[0]), 30, 260)
             .addText(this.lengthify(queueSongs[1]), 30, 420);
 
-        if
-         (queueSongs[2]) queue.addText(this.lengthify(queueSongs[2]), 30, 635);
+        if (queueSongs[2]) queue.addText(this.lengthify(queueSongs[2]), 30, 635);
         if (queueSongs[3]) queue.addText(this.lengthify(queueSongs[3]), 30, 685);
         if (queueSongs[4]) queue.addText(this.lengthify(queueSongs[4]), 30, 735);
         if (queueSongs[5]) queue.addText(this.lengthify(queueSongs[5]), 30, 775);
@@ -116,7 +116,7 @@ module.exports = class extends Command {
 
     lengthify(song) {
         if (!song.time) return song.title;
-        if (song.title.length <= 35) return "► " + song.title;
-        else return `► ${song.title.substring(0, 32)}...`;
+        if (song.title.length <= 45) return song.title;
+        else return `${song.title.substring(0, 45)}...`;
     }
 }

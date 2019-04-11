@@ -1,11 +1,11 @@
-const { Command, util: { isFunction } } = require("klasa");
+const { Command, RichDisplay, util: { isFunction } } = require("klasa");
 const Discord = require("discord.js");
 
 module.exports = class extends Command {
 
 	constructor(...args) {
 		super(...args, {
-			aliases: ["commands"],
+			aliases: ["h", "commands"],
 			guarded: true,
 			description: (language) => language.get("COMMAND_HELP_DESCRIPTION"),
 			usage: "(Command:command)"
@@ -19,37 +19,58 @@ module.exports = class extends Command {
 
 	async run(message, [command]) {
 		if (command) {
-			const info = [
-				`= ${command.name} = `,
-				"",
-				isFunction(command.description) ? command.description(message.language) : command.description,
-				message.language.get("COMMAND_HELP_USAGE", command.usage.fullUsage(message)),
-				message.language.get("COMMAND_HELP_EXTENDED"),
-				isFunction(command.extendedHelp) ? command.extendedHelp(message.language) : command.extendedHelp
-			].join("\n");
-			return message.sendMessage(info, { code: "asciidoc" });
+			let cmd = new Discord.MessageEmbed()
+                .setAuthor(`${message.language.get("COMMAND_HELP_CMD", command.name)}`, message.author.avatarURL())
+                .setColor("#FF3F3F")
+                .setThumbnail(this.client.user.avatarURL())
+                .setDescription(isFunction(command.description) ? command.description(message.language) : command.description)
+                .addField(message.language.get("COMMAND_HELP_USAGE"), `\`\`\`${command.usage.fullUsage(message)}\`\`\``)
+                .addField(message.language.get("COMMAND_HELP_EXTENDED"), isFunction(command.extendedHelp) ? command.extendedHelp(message.language) : command.extendedHelp)
+                .setFooter(message.language.get("REQUESTED", message.author.tag))
+                .setTimestamp();
+
+			return message.sendMessage(cmd);
 		}
-		const help = await this.buildHelp(message);
-		const categories = Object.keys(help);
-		const embeds = [];
+		const base = new Discord.MessageEmbed()
+			.setColor("#FF3F3F")
+			.setThumbnail(this.client.user.avatarURL())
+			.setFooter(message.language.get("REQUESTED", message.author.tag))
+			.setAuthor(message.language.get("COMMAND_HELP_INFO"), message.author.avatarURL())
+			.setTimestamp();
+
+		const display = new RichDisplay(base)
+			.setFooterPrefix(`${message.language.get("REQUESTED", message.author.tag)} (Page `)
+			.setFooterSuffix(")")
+			.setEmojis({
+				first: "519910927794176021",
+				back: "519911829619867688",
+				forward: "519910928041639947",
+				last: "519910927869673512",
+				stop: "519910927949365288",
+				info: "556410353765056532",
+				jump: "555116507949170718"
+			});
+
+        const help = await this.buildHelp(message);
+        const categories = Object.keys(help);
+
 		for (let cat = 0; cat < categories.length; cat++) {
-			const helpEmbed = new Discord.MessageEmbed().setColor("RANDOM").setThumbnail(this.client.user.avatarURL()).setFooter(message.language.get("REQUESTED", message.author.tag)).setTimestamp();
-			let temp = [];
 			const subCategories = Object.keys(help[categories[cat]]);
-			for (let subCat = 0; subCat < subCategories.length; subCat++) {
-				temp.push(`\n\`\`\`Markdown\n# ${subCategories[subCat]}\`\`\`\n`, `${help[categories[cat]][subCategories[subCat]].join(", ")}`);
-			}
-			helpEmbed.setAuthor(categories[cat], message.author.avatarURL()).setDescription(temp.join("\n"));
-			embeds.push(helpEmbed);
+
+			display.addPage(template => {
+                template.setAuthor(message.language.get("COMMAND_HELP_CATEGORY", categories[cat]), message.author.avatarURL());
+
+                for (let subCat = 0; subCat < subCategories.length; subCat++) {
+                    template.addField(`\n• ${subCategories[subCat]}\n`, `${help[categories[cat]][subCategories[subCat]].join(" \\▪ ")}`);
+                }
+
+                return template;
+			});
 		}
 
-		let err = false, sent = false;
-		return embeds.forEach(async (embed) => {
-			if (err === true) return;
-			await message.author.send(embed)
-				.then(() => { if (message.channel.type !== "dm" && sent === false) message.sendLocale("COMMAND_HELP_DM"); sent = true; })
-				.catch((e) => { if (message.channel.type !== "dm") message.sendLocale("COMMAND_HELP_NODM"); this.client.console.error(e); err = true; });
-		});
+		display.setInfoPage(base.setDescription(message.language.get("COMMAND_HELP_INFOS", display)));
+		display.infoPage.setFooter(`${message.language.get("REQUESTED", message.author.tag)} (Page ℹ)`);
+		return display.run(message, { time: 60000, filter: (reaction, user) => user.id === message.author.id });
 	}
 
 	async buildHelp(message) {
